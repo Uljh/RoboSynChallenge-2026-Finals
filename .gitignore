@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv*/
+policy/szu_synapse/checkpoints/
+.cache/
+*.log

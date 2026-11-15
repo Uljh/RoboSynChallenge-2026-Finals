@@ -1,0 +1,15 @@
+policy_name: szu_synapse
+task_name: null
+setting: clear
+seed: 0
+max_episodes: 20
+max_steps: 1000
+headless: true
+pytorch_device: cuda
+filter_dataset_saving: true
+eval_video_log: true
+eval_video_obs_keys: [cam_high, cam_left_wrist, cam_right_wrist]
+eval_expert_check: false
+checkpoint_path: null
+execute_steps: 10
+jax_platform: null

@@ -1,0 +1,58 @@
+{
+  "items_handover": {
+    "step": 1500,
+    "dataset_id": "items_handover_mix640_20261104/lerobot_mix640",
+    "normalization_sha256": "07334ff9e1d7c0b1e26353b6eb9fc31a6b18ce6c5013b13483805eee0207c339",
+    "normalization_relative_path": "assets/items_handover_mix640_20261104/lerobot_mix640/norm_stats.json",
+    "prompt": "Pick up the pen, hand it over to the other arm and then place it in to the pen holder",
+    "hf_path": "items_handover"
+  },
+  "click_bell": {
+    "step": 1500,
+    "dataset_id": "click_bell_mix640_20261105/lerobot_mix640",
+    "normalization_sha256": "55fa8becde451e6ed05ba6de5cba56165ce98a46ee6d0fd808b7f8409dbbfdef",
+    "normalization_relative_path": "assets/click_bell_mix640_20261105/lerobot_mix640/norm_stats.json",
+    "prompt": "Click the bell",
+    "hf_path": "click_bell"
+  },
+  "handle_basket": {
+    "step": 1500,
+    "dataset_id": "handle_basket_motion_repair_20261106/lerobot_mix640",
+    "normalization_sha256": "6dd83d25d4884a51a1da413d8af6f6bcf3032bb1100b62c2f4b054116e280e36",
+    "normalization_relative_path": "assets/handle_basket_motion_repair_20261106/lerobot_mix640/norm_stats.json",
+    "prompt": "Pick the bottle then place it to the basket, carry the basket with the other arm.",
+    "hf_path": "handle_basket"
+  },
+  "sample_loading": {
+    "step": 1500,
+    "dataset_id": "sample_loading_sim640_real48_20261114",
+    "normalization_sha256": "1699122165f94b2e48663dd487f46aa27733e9a04bbec48da13348f47b83d721",
+    "normalization_relative_path": "assets/sample_loading_sim640_real48_20261114/norm_stats.json",
+    "prompt": "Pick up the test tube on the right and insert it stably into the test-tube rack.",
+    "hf_path": "sample_loading"
+  },
+  "mixer_operating": {
+    "step": 4000,
+    "dataset_id": "mixer_operating_sim640_real48_20261113",
+    "normalization_sha256": "1c1ab5f222ddf51ff993d723f5facdfcbf197dcdcb2e5c6166af80490135ef2e",
+    "normalization_relative_path": "assets/mixer_operating_sim640_real48_20261113/norm_stats.json",
+    "prompt": "Pick the beaker, place it on the mixer, then flip the toggle switch with the other arm.",
+    "hf_path": "mixer_operating"
+  },
+  "table_rearrangement": {
+    "step": 1500,
+    "dataset_id": "table_rearrangement_sim640_real48_20261113",
+    "normalization_sha256": "06241c2b80f8ab8347b68a0779e9a67814506cd19c3c67b3b1f7a743112e3148",
+    "normalization_relative_path": "assets/table_rearrangement_sim640_real48_20261113/norm_stats.json",
+    "prompt": "Pick the fork and the spoon, place them next to the plate.",
+    "hf_path": "table_rearrangement"
+  },
+  "manipulate_pipette": {
+    "step": 2000,
+    "dataset_id": "manipulate_pipette_sim640_real48_20261115",
+    "normalization_sha256": "a3ac064b4205bec093accced9b79d968919db97c434afed90a7a4b074c517fed",
+    "normalization_relative_path": "assets/manipulate_pipette_sim640_real48_20261115/norm_stats.json",
+    "prompt": "Use the right arm to hold the pipette above the beaker, then use the left arm to press and release its button.",
+    "hf_path": "manipulate_pipette"
+  }
+}

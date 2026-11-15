@@ -1,0 +1,5 @@
+{
+  "repository": "https://github.com/EDEM-AI/RoboSynChallenge",
+  "commit": "45d9b9c4c78c66ef340a055697f3ad833ce567f4",
+  "scope": "policy-only overlay onto the official evaluation repository; no environment or scoring modifications"
+}

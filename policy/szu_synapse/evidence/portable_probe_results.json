@@ -1,0 +1,86 @@
+{
+  "items_handover": {
+    "state": "load_and_actual_inference_parity_passed",
+    "max_absolute_action_error": 0.0,
+    "input_transform_exact": true,
+    "inverse_transform_exact": true,
+    "shape": [
+      50,
+      14
+    ],
+    "seconds": 37.01948523521423,
+    "normalization_sha256": "07334ff9e1d7c0b1e26353b6eb9fc31a6b18ce6c5013b13483805eee0207c339"
+  },
+  "click_bell": {
+    "state": "load_and_actual_inference_parity_passed",
+    "max_absolute_action_error": 0.0,
+    "input_transform_exact": true,
+    "inverse_transform_exact": true,
+    "shape": [
+      50,
+      14
+    ],
+    "seconds": 86.46919918060303,
+    "normalization_sha256": "55fa8becde451e6ed05ba6de5cba56165ce98a46ee6d0fd808b7f8409dbbfdef"
+  },
+  "handle_basket": {
+    "state": "load_and_actual_inference_parity_passed",
+    "max_absolute_action_error": 0.0,
+    "input_transform_exact": true,
+    "inverse_transform_exact": true,
+    "shape": [
+      50,
+      14
+    ],
+    "seconds": 85.96834659576416,
+    "normalization_sha256": "6dd83d25d4884a51a1da413d8af6f6bcf3032bb1100b62c2f4b054116e280e36"
+  },
+  "sample_loading": {
+    "state": "load_and_actual_inference_parity_passed",
+    "max_absolute_action_error": 0.0,
+    "input_transform_exact": true,
+    "inverse_transform_exact": true,
+    "shape": [
+      50,
+      14
+    ],
+    "seconds": 108.9731616973877,
+    "normalization_sha256": "1699122165f94b2e48663dd487f46aa27733e9a04bbec48da13348f47b83d721"
+  },
+  "mixer_operating": {
+    "state": "load_and_actual_inference_parity_passed",
+    "max_absolute_action_error": 0.0,
+    "input_transform_exact": true,
+    "inverse_transform_exact": true,
+    "shape": [
+      50,
+      14
+    ],
+    "seconds": 71.18235111236572,
+    "normalization_sha256": "1c1ab5f222ddf51ff993d723f5facdfcbf197dcdcb2e5c6166af80490135ef2e"
+  },
+  "table_rearrangement": {
+    "state": "load_and_actual_inference_parity_passed",
+    "max_absolute_action_error": 0.0,
+    "input_transform_exact": true,
+    "inverse_transform_exact": true,
+    "shape": [
+      50,
+      14
+    ],
+    "seconds": 92.40382981300354,
+    "normalization_sha256": "06241c2b80f8ab8347b68a0779e9a67814506cd19c3c67b3b1f7a743112e3148"
+  },
+  "manipulate_pipette": {
+    "state": "load_and_actual_inference_parity_passed",
+    "max_absolute_action_error": 0.0,
+    "input_transform_exact": true,
+    "inverse_transform_exact": true,
+    "shape": [
+      50,
+      14
+    ],
+    "seconds": 38.82002568244934,
+    "normalization_sha256": "a3ac064b4205bec093accced9b79d968919db97c434afed90a7a4b074c517fed"
+  }
+}
