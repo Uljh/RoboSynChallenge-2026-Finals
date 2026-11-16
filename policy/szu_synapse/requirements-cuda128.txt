@@ -1,0 +1,6 @@
+# Linux / Python 3.11. CUDA 12.8 builds for RTX 5090 (Blackwell).
+--extra-index-url https://download.pytorch.org/whl/cu128
+-r requirements.txt
+torch==2.7.1+cu128
+torchvision==0.22.1+cu128
+nvidia-cuda-nvcc-cu12==12.8.93

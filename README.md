@@ -32,7 +32,8 @@ official evaluator:
 git clone https://github.com/Uljh/RoboSynChallenge-2026-Finals.git synapse-release
 cp -a synapse-release/policy/. /path/to/RoboSynChallenge/policy/
 cd /path/to/RoboSynChallenge
-python -m pip install -r policy/szu_synapse/requirements.txt
+python -m pip install -r policy/szu_synapse/requirements-cuda128.txt
+python -m pip check
 ```
 
 The supplied OpenPI source is imported directly from `policy/pi05/src` and
@@ -42,14 +43,17 @@ SHA256, so inference does not require a Google Cloud download. JAX parameters ar
 restored onto a single visible device with preallocation disabled. A CUDA 12
 environment and one GPU with sufficient free memory are required for practical
 robot control; the CPU path is provided for installation and interface checks.
-The historical inference environment used JAX 0.5.3, Flax 0.10.2,
-Orbax 0.11.13 and Torch 2.7.1.
+The CUDA 12.8 profile selects PyTorch 2.7.1+cu128 and torchvision 0.22.1+cu128
+from the official PyTorch index for RTX 5090 / Blackwell. It keeps JAX 0.5.3,
+Flax 0.10.2 and Orbax 0.11.13. Use an NVIDIA driver supporting the target GPU
+and CUDA 12.8. `requirements.lock.txt` records the earlier local environment,
+including CUDA 12.6 components; use the CUDA 12.8 profile above for deployment.
 
 For a separate inference-only smoke environment (without the simulator):
 
 ```bash
 python3.11 -m venv .venv-policy
-.venv-policy/bin/python -m pip install -r policy/szu_synapse/requirements.txt
+.venv-policy/bin/python -m pip install -r policy/szu_synapse/requirements-cuda128.txt
 ```
 
 ## Weights and task commands
