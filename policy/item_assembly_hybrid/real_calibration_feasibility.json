@@ -1,0 +1,46 @@
+{
+  "state": "real_hybrid_not_ready_for_morning_release",
+  "checked_at": "2026-11-16T00:26:18.080809+08:00",
+  "scan_sha256": "59dcd06e042f2fda18bfea05a3e906f393df347ecea763a2d6c292ee987a1a43",
+  "detection": [
+    {
+      "platform": 1,
+      "counts": {
+        "cam_high:frames": 10,
+        "cam_high:tag0": 10,
+        "cam_right_wrist:frames": 10,
+        "cam_right_wrist:tag0": 0,
+        "cam_left_wrist:frames": 10,
+        "cam_left_wrist:tag0": 0
+      }
+    },
+    {
+      "platform": 2,
+      "counts": {
+        "cam_high:frames": 10,
+        "cam_high:tag0": 10,
+        "cam_left_wrist:frames": 10,
+        "cam_left_wrist:tag0": 0,
+        "cam_right_wrist:frames": 10,
+        "cam_right_wrist:tag0": 0
+      }
+    },
+    {
+      "platform": 3,
+      "counts": {
+        "cam_high:frames": 38,
+        "cam_high:tag0": 38
+      }
+    }
+  ],
+  "manual_preview": "Platform1 sample01 both wrist raw images inspected: no visible calibration tag",
+  "interpretation": "Zero default-detector wrist detections is insufficient for solving wrist extrinsics from these records; it does not prove no alternative calibration is possible.",
+  "remaining": [
+    "validated wrist-to-link6 calibration for target rig",
+    "real tube geometry consistency and real RGB pose accuracy",
+    "real dual-arm mounting transform validation"
+  ],
+  "morning_decision": "Do not claim real hybrid readiness; mixed VLA is executable default per supervisor night-decision authorization; frozen_sim hybrid remains explicitly optional.",
+  "static_adapter": "Recorded-observation full geometry/IK action-path smoke passed; not closed-loop physics or real robot",
+  "geometry_weight_194": "pending Quark delivery with selected checkpoint; not yet present at checked canonical paths"
+}

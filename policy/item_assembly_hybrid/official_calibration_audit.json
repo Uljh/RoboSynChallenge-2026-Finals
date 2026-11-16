@@ -1,0 +1,262 @@
+{
+  "state": "official_three_calibration_archives_inspected",
+  "checked_beijing": "2026-11-16T00:01:25.407678+08:00",
+  "official_entry": "https://robosyn-bench.net/#/data",
+  "official_js_url": "https://robosyn-bench.net/static/js/pages-app.js?v=20261115-calibration-materials",
+  "official_js_sha256": "a510c65608830d284f52c196070824099c0113c3aea486a62a4463b270cf9cb2",
+  "platforms": [
+    {
+      "platform": 1,
+      "url": "https://drive.google.com/file/d/1XogU5gKNt5LfK2Mh8c8-4py17l8h_Pge/view",
+      "archive_sha256": "f8a2bc06ebaf85b11993fe65adfe67ff001834ac9c80136cfd16d45f6830c07c",
+      "bytes": 16233906,
+      "sample_count": 10,
+      "files": 74,
+      "record_groups": [
+        {
+          "mode": "eye-to-hand",
+          "camera": "cam_high",
+          "arm": "left",
+          "reference": "eef",
+          "count": 10
+        }
+      ],
+      "per_camera_intrinsics": {
+        "cam_high": [
+          [
+            606.315185546875,
+            0.0,
+            320.54931640625
+          ],
+          [
+            0.0,
+            606.1009521484375,
+            245.87710571289062
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "cam_right_wrist": [
+          [
+            608.63427734375,
+            0.0,
+            320.2765197753906
+          ],
+          [
+            0.0,
+            608.5237426757812,
+            246.64247131347656
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "cam_left_wrist": [
+          [
+            603.1170043945312,
+            0.0,
+            326.72747802734375
+          ],
+          [
+            0.0,
+            602.4186401367188,
+            251.93399047851562
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "camera_names": [
+        "cam_high",
+        "cam_left_wrist",
+        "cam_right_wrist"
+      ],
+      "json_top_level_keys": [
+        "T_camera_board",
+        "arm",
+        "arms",
+        "board",
+        "camera",
+        "cameras",
+        "detected_ids",
+        "detections",
+        "mode",
+        "reference",
+        "reprojection_rms_px",
+        "timestamp"
+      ],
+      "ready_to_use_wrist_to_link6_transform_present": false,
+      "object_CAD_present": false
+    },
+    {
+      "platform": 2,
+      "url": "https://drive.google.com/file/d/1TcdYAV6-4x42bA5OU25ffj6LzGBZo4oU/view",
+      "archive_sha256": "6d5ffeaeae9af911aced302f5500f5028c37abd0e8060506248a54dd60609c6d",
+      "bytes": 15955729,
+      "sample_count": 10,
+      "files": 74,
+      "record_groups": [
+        {
+          "mode": "eye-to-hand",
+          "camera": "cam_high",
+          "arm": "left",
+          "reference": "eef",
+          "count": 10
+        }
+      ],
+      "per_camera_intrinsics": {
+        "cam_high": [
+          [
+            606.192138671875,
+            0.0,
+            323.78448486328125
+          ],
+          [
+            0.0,
+            605.811279296875,
+            250.43460083007812
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "cam_left_wrist": [
+          [
+            607.2387084960938,
+            0.0,
+            326.9586486816406
+          ],
+          [
+            0.0,
+            607.2044067382812,
+            243.83236694335938
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "cam_right_wrist": [
+          [
+            607.283447265625,
+            0.0,
+            322.3223876953125
+          ],
+          [
+            0.0,
+            607.4154052734375,
+            256.79730224609375
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "camera_names": [
+        "cam_high",
+        "cam_left_wrist",
+        "cam_right_wrist"
+      ],
+      "json_top_level_keys": [
+        "T_camera_board",
+        "arm",
+        "arms",
+        "board",
+        "camera",
+        "cameras",
+        "detected_ids",
+        "detections",
+        "mode",
+        "reference",
+        "reprojection_rms_px",
+        "timestamp"
+      ],
+      "ready_to_use_wrist_to_link6_transform_present": false,
+      "object_CAD_present": false
+    },
+    {
+      "platform": 3,
+      "url": "https://drive.google.com/file/d/1q1Ox6kWqvCOzmIlwoZVX1f6HqMRrQi6T/view",
+      "archive_sha256": "2f0328948451496a661a046ebc4835ca15d267ca4fe0331b12566c1a4ce76971",
+      "bytes": 22621061,
+      "sample_count": 38,
+      "files": 118,
+      "record_groups": [
+        {
+          "mode": "eye-to-hand",
+          "camera": "cam_high",
+          "arm": "left",
+          "reference": "eef",
+          "count": 38
+        }
+      ],
+      "per_camera_intrinsics": {
+        "cam_high": [
+          [
+            607.1878662109375,
+            0.0,
+            322.3596496582031
+          ],
+          [
+            0.0,
+            607.2855834960938,
+            252.5382843017578
+          ],
+          [
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "camera_names": [
+        "cam_high"
+      ],
+      "json_top_level_keys": [
+        "T_camera_board",
+        "arm",
+        "arms",
+        "board",
+        "camera",
+        "cameras",
+        "detected_ids",
+        "detections",
+        "mode",
+        "reference",
+        "reprojection_rms_px",
+        "timestamp"
+      ],
+      "ready_to_use_wrist_to_link6_transform_present": false,
+      "object_CAD_present": false
+    }
+  ],
+  "hardware_materials_listed": [
+    "main-view camera bracket STEP",
+    "wrist-view camera bracket3MF",
+    "Piper mounting plate STEP"
+  ],
+  "finding": "Official raw calibration observations and factory intrinsics are available; all58 sample records are cam_high eye-to-hand. Platforms1/2 also contain wrist images and intrinsics; platform3 contains only high camera. No solved wrist-camera-to-link6 transform or tube CAD is present in these three archives or the listed three hardware resources.",
+  "inference": "Raw images and robot poses may support additional calibration work; absence of a solved transform is not proof calibration is impossible. No such fitting or real calibration validation was performed in this packaging task.",
+  "frozen_model": "Fixed simulation nominal guijiao_standard meshes and single wrist intrinsics [603.117004,602.418640,326.727478,251.93399] used for both wrists. Those numbers match platform1 left wrist within rounding, but not all right wrists/platforms.",
+  "real_robot_ready": false,
+  "unresolved": [
+    "selected evaluation platform/camera serial mapping",
+    "validated per-wrist camera-to-link6 transforms",
+    "verified object geometry and dimensions match real centrifuge tubes",
+    "real FK/IK backend and gripper transform agreement",
+    "real image-domain pose-estimator performance"
+  ]
+}

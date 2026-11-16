@@ -1,0 +1,14 @@
+{
+  "item_assembly": {
+    "state": "load_and_actual_inference_parity_passed",
+    "max_absolute_action_error": 0.0,
+    "input_transform_exact": true,
+    "inverse_transform_exact": true,
+    "shape": [
+      50,
+      14
+    ],
+    "seconds": 37.91342091560364,
+    "normalization_sha256": "99b69e45879289942dc103a592405d2e24b8140fe28c8e600f369e7bde613315"
+  }
+}

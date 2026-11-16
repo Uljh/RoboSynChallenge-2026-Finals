@@ -1,0 +1,6 @@
+# Optional frozen_sim controller; use the unified verified VLA environment.
+-r ../szu_synapse/requirements.txt
+# Additional versions actually imported in the clean 194 environment.
+scipy==1.17.1
+trimesh==4.12.2
+# Do not install opencv-python-headless alongside unified opencv-python.

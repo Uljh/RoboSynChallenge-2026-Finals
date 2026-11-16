@@ -1,0 +1,11 @@
+{
+  "state": "four_pages_rendered_and_visually_reviewed",
+  "pages": 4,
+  "main_text_pages": 4,
+  "required_maximum_main_pages": 6,
+  "overfull_or_undefined_warnings": [],
+  "pdf_sha256": "d725d6e73a0be0bceea9ba880c0969640f9cc82eca4fd036daf73d646bb3690d",
+  "selection_revision": "Drawer actual deployment v2; assembly min REAL loss; water user1500",
+  "finished": 1794771006.2476728,
+  "final_revision": "Drawer cross-GPU failed consistency explicitly disclosed; CPU36 exact; page4 re-rendered and reviewed, pages1-3 image hashes unchanged"
+}

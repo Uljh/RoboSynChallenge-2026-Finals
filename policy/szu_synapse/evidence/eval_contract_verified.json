@@ -1,0 +1,27 @@
+{
+  "state": "evaluator_api_contract_passed",
+  "cases": [
+    {
+      "termination": null,
+      "steps_executed": 10,
+      "passed": true
+    },
+    {
+      "termination": "terminated",
+      "steps_executed": 3,
+      "passed": true
+    },
+    {
+      "termination": "truncated",
+      "steps_executed": 2,
+      "passed": true
+    },
+    {
+      "termination": "success",
+      "steps_executed": 4,
+      "passed": true
+    }
+  ],
+  "scope": "Mock environment checks action batch shape, return tuple and early stopping; no model performance or physical simulation measured.",
+  "checked": 1794762019.8985522
+}

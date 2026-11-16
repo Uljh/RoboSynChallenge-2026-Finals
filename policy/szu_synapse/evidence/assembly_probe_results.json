@@ -1,0 +1,14 @@
+{
+  "item_assembly": {
+    "state": "actual_load_and_action_smoke_passed",
+    "step": 1500,
+    "normalization_sha256": "99b69e45879289942dc103a592405d2e24b8140fe28c8e600f369e7bde613315",
+    "shape": [
+      50,
+      14
+    ],
+    "finite": true,
+    "updated": 1794767321.3037484,
+    "scope": "Actual selected checkpoint with bundled clean runtime, synthetic observations; not task success or real closed-loop validation."
+  }
+}

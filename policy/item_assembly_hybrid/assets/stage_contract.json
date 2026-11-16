@@ -1,0 +1,83 @@
+{
+  "state_low": [
+    -1.2018153667449951,
+    1.1465058326721191,
+    -1.3260059356689453,
+    -1.4068114757537842,
+    -1.304815649986267,
+    -0.6857151985168457,
+    -7.108238787623122e-05,
+    0.49874186515808105,
+    1.515670657157898,
+    -1.5770684480667114,
+    -0.7061076760292053,
+    0.5886088609695435,
+    1.8134821653366089,
+    -6.957211735425517e-05
+  ],
+  "state_high": [
+    0.13431650400161743,
+    1.709277629852295,
+    -0.03546112775802612,
+    1.723358154296875,
+    1.2986239194869995,
+    2.214029312133789,
+    1.004404902458191,
+    0.9696907997131348,
+    1.9581199884414673,
+    -0.9330457448959351,
+    0.17732584476470947,
+    1.3374375104904175,
+    2.8164210319519043,
+    1.0014628171920776
+  ],
+  "norm_hashes": {
+    "base": "d1d9c6365e6809b0540051266d4df3075e9fafe19fda7640e79ad59ab96a780d",
+    "precision": "9327cf73239c017f278312e44e87185b1c473e18aa3a14201947c5c1ac0f66bb"
+  },
+  "policy_horizons": {
+    "base": 50,
+    "precision": 1
+  },
+  "gate_bounds_source_sha256": "a855a94a3672ef7b3946aefda56cab326790f54cf8d1604af542891dd989700c",
+  "gate_bounds_unchanged": true,
+  "encoder_state_low": [
+    -1.2018153667449951,
+    1.1465058326721191,
+    -1.3260059356689453,
+    -1.4068114757537842,
+    -1.304815649986267,
+    -0.6857151985168457,
+    -7.108238787623122e-05,
+    0.49874186515808105,
+    1.515670657157898,
+    -1.6156517267227173,
+    -0.7061076760292053,
+    0.5886088609695435,
+    1.8134821653366089,
+    -6.957211735425517e-05
+  ],
+  "encoder_state_high": [
+    0.13431650400161743,
+    1.8182586431503296,
+    -0.03546112775802612,
+    1.723358154296875,
+    1.2986239194869995,
+    2.214029312133789,
+    1.004404902458191,
+    0.9696907997131348,
+    1.9581199884414673,
+    -0.9330457448959351,
+    0.17732584476470947,
+    1.3374375104904175,
+    2.8164210319519043,
+    1.0014628171920776
+  ],
+  "precision_payload": "1x14 compatibility packet: first9 are endpoint delta3 and two axes3, remaining5 unused; NOT joint actions",
+  "precision_integrity_field": "norm_hashes.precision is a geometry bundle hash, not an action normalizer",
+  "architecture": "Frozen VLA grasp plus learned wrist-relative pipe pose plus bounded IK controller",
+  "precision_input": "Original wrist RGB, gripper opening, observed joints, calibrated wrist cameras and fixed nominal CAD shape",
+  "ground_truth_objects_in_control": false,
+  "geometry_refinement": "RGB CAD edges followed by robust EMA in link6 frame before observed-joint FK; reset every episode; no object truth or actual scene scale input",
+  "nominal_geometry_limitation": "Size variation requires independent validation; this fit uses nominal task CAD scales only"
+}

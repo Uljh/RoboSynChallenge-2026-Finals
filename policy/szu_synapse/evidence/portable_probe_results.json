@@ -82,5 +82,41 @@
     ],
     "seconds": 38.82002568244934,
     "normalization_sha256": "a3ac064b4205bec093accced9b79d968919db97c434afed90a7a4b074c517fed"
+  },
+  "water_pouring": {
+    "state": "load_and_actual_inference_parity_passed",
+    "max_absolute_action_error": 0.0,
+    "input_transform_exact": true,
+    "inverse_transform_exact": true,
+    "shape": [
+      50,
+      14
+    ],
+    "seconds": 34.24089503288269,
+    "normalization_sha256": "00a0bcbe04a6ed06b191deed185083bd8ca58788539e97b800490ed23fcea803"
+  },
+  "item_assembly": {
+    "state": "load_and_actual_inference_parity_passed",
+    "max_absolute_action_error": 0.0,
+    "input_transform_exact": true,
+    "inverse_transform_exact": true,
+    "shape": [
+      50,
+      14
+    ],
+    "seconds": 37.91342091560364,
+    "normalization_sha256": "99b69e45879289942dc103a592405d2e24b8140fe28c8e600f369e7bde613315"
+  },
+  "drawer_open_place": {
+    "state": "load_and_actual_inference_parity_passed",
+    "max_absolute_action_error": 0.0,
+    "input_transform_exact": true,
+    "inverse_transform_exact": true,
+    "shape": [
+      50,
+      14
+    ],
+    "seconds": 34.26052522659302,
+    "normalization_sha256": "a38a6a813e26aa410f6f117a6f5de108f5f08e36abf934f652ae9ccd901af18e"
   }
 }

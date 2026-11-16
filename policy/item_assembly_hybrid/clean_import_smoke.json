@@ -1,0 +1,17 @@
+{
+  "state": "passed",
+  "modules": {
+    "policy.item_assembly_hybrid.deploy_policy": "passed",
+    "policy.item_assembly_hybrid.learned_geometry": "passed",
+    "policy.item_assembly_hybrid.edge_refinement": "passed",
+    "policy.item_assembly_hybrid.wrist_model": "passed",
+    "policy.szu_synapse.runtime": "passed",
+    "openpi.shared.normalize": "passed"
+  },
+  "training_config_loaded": false,
+  "lerobot_loaded": false,
+  "trimesh_added_in_component_extras": true,
+  "shared_environment_modified": false,
+  "actual_weights_loaded": false,
+  "finished": 1794760066.9347782
+}

@@ -1,0 +1,14 @@
+{
+  "drawer_open_place": {
+    "state": "actual_load_and_action_smoke_passed",
+    "step": 3000,
+    "normalization_sha256": "a38a6a813e26aa410f6f117a6f5de108f5f08e36abf934f652ae9ccd901af18e",
+    "shape": [
+      50,
+      14
+    ],
+    "finite": true,
+    "updated": 1794769520.5754921,
+    "scope": "Actual selected checkpoint with bundled clean runtime, synthetic observations; not task success or real closed-loop validation."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "environment": "194 clean_runtime_env plus component-local trimesh extras; verified 2026-11-16",
+  "numpy": "1.26.4",
+  "scipy": "1.17.1",
+  "torch": "2.7.1+cu126",
+  "trimesh": "4.12.2",
+  "opencv-python": "4.11.0.86",
+  "historical_H800_environment": {
+    "numpy": "1.26.4",
+    "scipy": "1.15.3",
+    "torch": "2.7.1",
+    "trimesh": "4.12.2",
+    "jax": "0.5.3",
+    "jaxlib": "0.5.3",
+    "flax": "0.10.2",
+    "orbax-checkpoint": "0.11.13",
+    "opencv-python-headless": "4.11.0.86",
+    "opencv-python": "4.11.0.86"
+  }
+}

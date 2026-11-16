@@ -1,0 +1,46 @@
+{
+  "state": "portable_geometry_CPU_parity_and_package_paths_passed",
+  "finished": 1794758457.5180862,
+  "samples": [
+    {
+      "episode": 640,
+      "frame": 180,
+      "max_abs_difference": 0.0
+    },
+    {
+      "episode": 640,
+      "frame": 183,
+      "max_abs_difference": 0.0
+    },
+    {
+      "episode": 640,
+      "frame": 186,
+      "max_abs_difference": 0.0
+    },
+    {
+      "episode": 640,
+      "frame": 186,
+      "max_abs_difference": 0.0
+    }
+  ],
+  "reset_parity": true,
+  "actual_geometry_model_sha256": "e3aa4bd4ac3aea54e5c39b3ace30829565767a52f0a671a2d958e8aff6e3088d",
+  "base_policy_probe": "stub only before scheduled training; actual selected mixed VLA reload remains pending",
+  "geometry_model": "real frozen checkpoint, actual RGB inference",
+  "package_has_host_absolute_paths": false,
+  "real_robot_ready": false,
+  "mathematical_changes": false,
+  "full_robot_IK_runtime": "pending minimal post-training integration check",
+  "versions": {
+    "numpy": "1.26.4",
+    "scipy": "1.15.3",
+    "torch": "2.7.1",
+    "trimesh": "4.12.2",
+    "jax": "0.5.3",
+    "jaxlib": "0.5.3",
+    "flax": "0.10.2",
+    "orbax-checkpoint": "0.11.13",
+    "opencv-python-headless": "4.11.0.86",
+    "opencv-python": "4.11.0.86"
+  }
+}

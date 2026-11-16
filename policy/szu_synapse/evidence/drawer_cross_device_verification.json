@@ -1,0 +1,18 @@
+{
+  "state": "194_actual_deployment_policy_loaded_and_probed",
+  "norm_sha256": "a38a6a813e26aa410f6f117a6f5de108f5f08e36abf934f652ae9ccd901af18e",
+  "probe_count": 36,
+  "validation_backend": "cpu",
+  "reference_backend": "H800_CPU",
+  "cpu_reference_sha256": "c4a0a82db2df09aa082dda0e748406af12bc25797efc4d7c22a291a84dcdf081",
+  "transformed_inputs_and_noise_exact": true,
+  "cross_GPU_check_passed": false,
+  "cross_device_tolerance": {
+    "atol": 0.01,
+    "rtol": 0.005
+  },
+  "source_parameter_bitwise_equivalence": true,
+  "real_robot_success_verified": false,
+  "maximum_CPU_pair_action_difference": 0.0,
+  "scope": "Matched CPU source/destination inference passed. Separate H800/RTX4090 numerical consistency exceeded predefined tolerance; that failed comparison is not relabeled as passed."
+}

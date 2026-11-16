@@ -1,0 +1,113 @@
+{
+  "state": "CPU_official_interface_and_static_geometry_IK_smoke_passed",
+  "finished": 1794759846.853599,
+  "episode": 640,
+  "frame": 290,
+  "coarse_commands": 10,
+  "precision_commands": 1,
+  "precision_max_left_joint_delta_rad": 0.0032052993774414062,
+  "right_arm_held": true,
+  "reset_repeatability": true,
+  "normalized_default": true,
+  "explicit_sim_conversion_checked": true,
+  "geometry_model": "actual frozen model and recorded RGB",
+  "base_model": "recorded expert-action fixture, not selected VLA",
+  "environment": "recording interface fixture, not closed-loop physics",
+  "native_10of12_reproduced": false,
+  "real_robot_ready": false,
+  "native_IK_replaced_by_existing_bounded_local_IK": true,
+  "gate_audit": "static FK self-consistency, not independent native FK validation",
+  "limits": "archived first simulator scene, not universal hardware limits",
+  "gate_scan": [
+    {
+      "frame": 150,
+      "gap_m": 0.15302556364118444,
+      "normalized_arm_max": 1.6414145478192106,
+      "eligible": false
+    },
+    {
+      "frame": 160,
+      "gap_m": 0.1295968222328719,
+      "normalized_arm_max": 1.2932603659865063,
+      "eligible": false
+    },
+    {
+      "frame": 170,
+      "gap_m": 0.11048211678410418,
+      "normalized_arm_max": 0.9408471934960771,
+      "eligible": false
+    },
+    {
+      "frame": 180,
+      "gap_m": 0.09876717292162301,
+      "normalized_arm_max": 0.7691676452994277,
+      "eligible": false
+    },
+    {
+      "frame": 190,
+      "gap_m": 0.09914348644034716,
+      "normalized_arm_max": 0.7742925459533747,
+      "eligible": false
+    },
+    {
+      "frame": 200,
+      "gap_m": 0.09903911591338212,
+      "normalized_arm_max": 0.7796559618646725,
+      "eligible": false
+    },
+    {
+      "frame": 210,
+      "gap_m": 0.09894166544384568,
+      "normalized_arm_max": 0.7849820965279296,
+      "eligible": false
+    },
+    {
+      "frame": 220,
+      "gap_m": 0.09885108320063865,
+      "normalized_arm_max": 0.7902679843893247,
+      "eligible": false
+    },
+    {
+      "frame": 230,
+      "gap_m": 0.09876765980094128,
+      "normalized_arm_max": 0.795517861954317,
+      "eligible": false
+    },
+    {
+      "frame": 240,
+      "gap_m": 0.09869117032800585,
+      "normalized_arm_max": 0.800728340018539,
+      "eligible": false
+    },
+    {
+      "frame": 250,
+      "gap_m": 0.09862176567391732,
+      "normalized_arm_max": 0.8058968766787153,
+      "eligible": false
+    },
+    {
+      "frame": 260,
+      "gap_m": 0.09855954544996381,
+      "normalized_arm_max": 0.8110264374886673,
+      "eligible": false
+    },
+    {
+      "frame": 270,
+      "gap_m": 0.08377834099701992,
+      "normalized_arm_max": 0.7002570711512619,
+      "eligible": false
+    },
+    {
+      "frame": 280,
+      "gap_m": 0.06908955731693003,
+      "normalized_arm_max": 0.6791901642573941,
+      "eligible": false
+    },
+    {
+      "frame": 290,
+      "gap_m": 0.05457060169525003,
+      "normalized_arm_max": 0.679190172691057,
+      "eligible": true
+    }
+  ]
+}

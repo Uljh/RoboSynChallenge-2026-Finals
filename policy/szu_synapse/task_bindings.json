@@ -54,5 +54,29 @@
     "normalization_relative_path": "assets/manipulate_pipette_sim640_real48_20261115/norm_stats.json",
     "prompt": "Use the right arm to hold the pipette above the beaker, then use the left arm to press and release its button.",
     "hf_path": "manipulate_pipette"
+  },
+  "water_pouring": {
+    "step": 1500,
+    "dataset_id": "RoboSynChallenge/cobotmagic_Real_water_pouring",
+    "normalization_sha256": "00a0bcbe04a6ed06b191deed185083bd8ca58788539e97b800490ed23fcea803",
+    "normalization_relative_path": "assets/RoboSynChallenge/cobotmagic_Real_water_pouring/norm_stats.json",
+    "prompt": "Pick the cup and the bottle with the other arm, pour the water from bottle to cup",
+    "hf_path": "water_pouring"
+  },
+  "item_assembly": {
+    "step": 1500,
+    "dataset_id": "item_assembly_sim_real_20261116",
+    "normalization_relative_path": "assets/item_assembly_sim_real_20261116/norm_stats.json",
+    "normalization_sha256": "99b69e45879289942dc103a592405d2e24b8140fe28c8e600f369e7bde613315",
+    "prompt": "Pick up two centrifuge tubes from the table and dock them horizontally.",
+    "hf_path": "item_assembly"
+  },
+  "drawer_open_place": {
+    "step": 3000,
+    "dataset_id": "drawer_real48_sim_replay_20261115",
+    "normalization_relative_path": "assets/drawer_real48_sim_replay_20261115/norm_stats.json",
+    "normalization_sha256": "a38a6a813e26aa410f6f117a6f5de108f5f08e36abf934f652ae9ccd901af18e",
+    "prompt": "Open the drawer, pick the tomato with the other arm then place it in the drawer.",
+    "hf_path": "drawer_open_place"
   }
 }

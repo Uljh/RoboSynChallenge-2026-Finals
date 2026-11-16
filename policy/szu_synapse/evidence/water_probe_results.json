@@ -1,0 +1,14 @@
+{
+  "water_pouring": {
+    "state": "actual_load_and_action_smoke_passed",
+    "step": 1500,
+    "normalization_sha256": "00a0bcbe04a6ed06b191deed185083bd8ca58788539e97b800490ed23fcea803",
+    "shape": [
+      50,
+      14
+    ],
+    "finite": true,
+    "updated": 1794761804.7145402,
+    "scope": "Actual selected checkpoint with bundled clean runtime, synthetic observations; not task success or real closed-loop validation."
+  }
+}

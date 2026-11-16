@@ -1,0 +1,10 @@
+{
+  "state": "frozen_native_controller_AST_parity_passed",
+  "files": [
+    "learned_servo.py",
+    "local_ik.py",
+    "kinematic_gate.py"
+  ],
+  "allowed_change": "relative import level only",
+  "controller_math_changed": false
+}

@@ -7,15 +7,19 @@ This is a **policy-only overlay** based on official RoboSynChallenge commit
 and scoring code are supplied by the evaluator. Every runtime file in this
 release is under `policy/`; no modifications to the environment or scoring are required.
 
-The release is being assembled. Seven checkpoint selections are fixed; the
-assembly, drawer and water adaptation runs are still being finalized. A weight
-upload or interface check alone is not a completed submission.
+The ten selected inference checkpoints, their paired normalization statistics,
+and the technical report are included in this release. The weights have been
+checked against source SHA256 manifests; all ten selected policies passed
+actual loading and deterministic comparison with the established loader.
+These packaging checks do not measure physical closed-loop task success.
 
 - Code: <https://github.com/Uljh/RoboSynChallenge-2026-Finals>
 - Weights: <https://huggingface.co/lige65456/robosyn-finals-2026-pi05>
 - Policy entry: `policy/szu_synapse`
 - Per-task model/normalization binding: `policy/szu_synapse/task_bindings.json`
 - Upstream runtime provenance: `policy/szu_synapse/upstream.json`
+- Frozen artifacts: `policy/szu_synapse/release_manifest.json`
+- [Technical report](policy/szu_synapse/report/SZU_VCC_Synapse_Technical_Report.pdf)
 
 ## Installation
 
@@ -80,8 +84,9 @@ bash policy/szu_synapse/eval.sh table_rearrangement "$PWD/policy/szu_synapse/che
 bash policy/szu_synapse/eval.sh water_pouring "$PWD/policy/szu_synapse/checkpoints/water_pouring" 0 --setting random
 ```
 
-The three unfinished task bindings become usable only when their selected
-checkpoint and paired normalization are included in the final release manifest.
+All ten task bindings are finalized. Use the exact paired normalization in
+each task directory. The manifest records immutable model revisions and every
+published file count and download size.
 
 ## Runtime contract
 
@@ -104,25 +109,54 @@ executes ten before observing again at the nominal 10Hz control rate.
 No expert policy, task-object ground truth, or hidden simulator state is read to
 construct the ordinary policy actions.
 
-## Assembly-specific status
+## Assembly mode
 
-The selected mixed VLA will be deployable independently of the optional frozen
-simulation visual-servo component. That component currently depends on
-simulation tube geometry and wrist calibration. Its reported historical 10/12
-result is a hybrid simulation result, not pure-VLA or physical success. It is not
-enabled for real evaluation unless its geometry, calibration and outer control
-interface have been explicitly validated. The final release will state which
-mode is bound to the official task entry.
+The official physical entry uses the selected step-1500 mixed VLA directly.
+The separately packaged `policy/item_assembly_hybrid` is an optional simulation
+visual/kinematic controller. Its selected VLA, geometry network and bounded IK
+passed a recorded-observation interface smoke; physical geometry and wrist
+calibration remain unverified. It is not enabled by the physical task binding.
+The historical 10/12 result belongs to the earlier hybrid simulation system,
+not this submitted VLA or a physical evaluation.
+
+The auxiliary geometry model is under `item_assembly/geometry/` in the model
+repository and is verified by the unified task downloader. Optional-controller
+installation and exact limits are documented in its own README.
 
 ## Evidence and licenses
 
-The seven existing selected checkpoints passed deterministic comparison against
+All ten selected checkpoints passed deterministic comparison against
 their established loader: identical pre/post transforms and maximum absolute
 generated-action difference 0.0 for the fixed CPU probe. A separate clean
 environment and bundled-source model load/inference smoke also passed. These
 checks establish packaging consistency, not physical success.
 
+Drawer also passed all 36 paired H800-CPU/194-CPU recorded-observation probes
+with zero action difference. Its separate H800-GPU/RTX4090-GPU check exceeded
+the predefined tolerance and remains recorded as failed; CPU parity does not
+certify hardware-independent numerical equivalence. See
+`policy/szu_synapse/evidence/drawer_cross_device_verification.json`.
+
 OpenPI code is distributed under its Apache-2.0 license in `policy/pi05/LICENSE`.
 The fine-tuned model derivatives are subject to the supplied Gemma Terms of Use,
 including Section 3.2 use restrictions, and the model repository's NOTICE.
 No training datasets, optimizer state or account credentials are distributed.
+
+## Selected adaptation checkpoints
+
+| Task | Step |
+|---|---:|
+| `click_bell` | 1500 |
+| `drawer_open_place` | 3000 |
+| `handle_basket` | 1500 |
+| `item_assembly` | 1500 |
+| `items_handover` | 1500 |
+| `manipulate_pipette` | 2000 |
+| `mixer_operating` | 4000 |
+| `sample_loading` | 1500 |
+| `table_rearrangement` | 1500 |
+| `water_pouring` | 1500 |
+
+Steps count adaptation updates after each selected simulation checkpoint.
+Water step 1500 and sample-loading step 1500 are explicit user selections;
+other task-specific selection rules are described in the report.

@@ -1,0 +1,19 @@
+{
+  "end_offsets_finger_midpoint_frame": [
+    [
+      -0.1070709228515625,
+      -0.004727371037006378,
+      -0.0009000079589895904
+    ],
+    [
+      0.10049683600664139,
+      0.0022706491872668266,
+      -0.005140956956893206
+    ]
+  ],
+  "threshold_m": 0.055,
+  "training_episodes": 19,
+  "calibration_sha256": "d644d864e3748b2c3c5bf9e23c6acb7b75387dc25ca9fbf5e152e3fd58744ea7",
+  "scope": "Leave-one-trajectory-out training-only offset calibration; no evaluation scene used. Derived robot kinematics only at deployment. This is a handoff estimate, not a precision pose sensor.",
+  "no_object_truth_at_deployment": true
+}

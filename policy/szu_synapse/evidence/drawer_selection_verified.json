@@ -1,0 +1,120 @@
+{
+  "state": "deployment_v2_selection_and_strict_reload_independently_verified",
+  "selection_sha256": "d986116322794f8f817a0b55e6516ae2b5a879d4fc198bfa5b95b3329a719124",
+  "load_proof_sha256": "5f1f18d55fd9322b969fa3084b2ff4307d16b6c84f8a2445b94ae99c54bf4847",
+  "normalization_sha256": "a38a6a813e26aa410f6f117a6f5de108f5f08e36abf934f652ae9ccd901af18e",
+  "ranked_reload": {
+    "samples": 384,
+    "maximum_action_error": 0.0,
+    "allclose_atol": 2e-06,
+    "allclose_rtol": 1e-06,
+    "exact_input_transform_probes": 12,
+    "file_sha256": "a09e79b8abb59632594313f2916fac2a0bc2900c0c5a82c7c4d41904535df0ac",
+    "deployment_precision": "bfloat16"
+  },
+  "additional_optimizer_updates": 0,
+  "selected_step": 3000,
+  "selected_score": 0.0005897521519968254,
+  "baseline_score": 0.019458194477324206,
+  "reports": [
+    {
+      "step": 0,
+      "score": 0.019458194477324206,
+      "report_sha256": "d59e5bbd020fdd40f05947714f68e7ace878e8f3d5da5a226e7b58d5b4bc241b",
+      "binding": {
+        "checkpoint_commit_sha256": "0b99acd87faa9cac948b1d8c48e8247d4b1e7f4e053d302a771d5da6348b7050",
+        "norm_sha256": "9b8bcc318870a174f3476d2d3931428f37e29b16c326a9fbf95a9f6d40924b64",
+        "fixture_sha256": "16dd7c85355c30e77c842c371f03c58faa48163d6f22505b75130b58ae6e5c99",
+        "source_sha256": "e51bf0abd4bc3403fc2f973a4d9d52da1119e99c8d5c4ae0187b27234ae08625",
+        "batch_size": 16,
+        "noise": "fold_in(key20261115,batch_index)",
+        "sampler": "create_trained_policy._sample_actions(num_steps=10)"
+      }
+    },
+    {
+      "step": 500,
+      "score": 0.0019110888322782758,
+      "report_sha256": "cf336e68cad086b6297dbb5a806785d20c998b8decffe4d37c01a531572358e2",
+      "binding": {
+        "checkpoint_commit_sha256": "d25c5d86c46d63cafa695a0a07d9a5aa47b2efd7bf9b4da9c981855b47cf38f7",
+        "norm_sha256": "a38a6a813e26aa410f6f117a6f5de108f5f08e36abf934f652ae9ccd901af18e",
+        "fixture_sha256": "16dd7c85355c30e77c842c371f03c58faa48163d6f22505b75130b58ae6e5c99",
+        "source_sha256": "e51bf0abd4bc3403fc2f973a4d9d52da1119e99c8d5c4ae0187b27234ae08625",
+        "batch_size": 16,
+        "noise": "fold_in(key20261115,batch_index)",
+        "sampler": "create_trained_policy._sample_actions(num_steps=10)"
+      }
+    },
+    {
+      "step": 1000,
+      "score": 0.0009304059774280565,
+      "report_sha256": "4e1c55a73bfa930ed587da7e930d2d6ff92c8432b689d0aee2486126eff695fa",
+      "binding": {
+        "checkpoint_commit_sha256": "c3eda274c44e078d2cd2110df0679b354fa69b84d97f189b5a110cc021fc81f7",
+        "norm_sha256": "a38a6a813e26aa410f6f117a6f5de108f5f08e36abf934f652ae9ccd901af18e",
+        "fixture_sha256": "16dd7c85355c30e77c842c371f03c58faa48163d6f22505b75130b58ae6e5c99",
+        "source_sha256": "e51bf0abd4bc3403fc2f973a4d9d52da1119e99c8d5c4ae0187b27234ae08625",
+        "batch_size": 16,
+        "noise": "fold_in(key20261115,batch_index)",
+        "sampler": "create_trained_policy._sample_actions(num_steps=10)"
+      }
+    },
+    {
+      "step": 1500,
+      "score": 0.000794706081300537,
+      "report_sha256": "3646d07beb7105ecc6d56c1f215096567bdc05373177eec06dd6365733c019fe",
+      "binding": {
+        "checkpoint_commit_sha256": "ed2d8cf36506e6bd2e05f44abd4e7637a597b67e0e95e3dee654a66104617b1e",
+        "norm_sha256": "a38a6a813e26aa410f6f117a6f5de108f5f08e36abf934f652ae9ccd901af18e",
+        "fixture_sha256": "16dd7c85355c30e77c842c371f03c58faa48163d6f22505b75130b58ae6e5c99",
+        "source_sha256": "e51bf0abd4bc3403fc2f973a4d9d52da1119e99c8d5c4ae0187b27234ae08625",
+        "batch_size": 16,
+        "noise": "fold_in(key20261115,batch_index)",
+        "sampler": "create_trained_policy._sample_actions(num_steps=10)"
+      }
+    },
+    {
+      "step": 2000,
+      "score": 0.000659485146404461,
+      "report_sha256": "23b5a3a9cc5430d53e10f08e3ef24386dcd1cb14e835695d0da9fb902c575e79",
+      "binding": {
+        "checkpoint_commit_sha256": "634a293f46144c440061a606299958a6cc77898ba2b4a2eade521754a37b151b",
+        "norm_sha256": "a38a6a813e26aa410f6f117a6f5de108f5f08e36abf934f652ae9ccd901af18e",
+        "fixture_sha256": "16dd7c85355c30e77c842c371f03c58faa48163d6f22505b75130b58ae6e5c99",
+        "source_sha256": "e51bf0abd4bc3403fc2f973a4d9d52da1119e99c8d5c4ae0187b27234ae08625",
+        "batch_size": 16,
+        "noise": "fold_in(key20261115,batch_index)",
+        "sampler": "create_trained_policy._sample_actions(num_steps=10)"
+      }
+    },
+    {
+      "step": 2500,
+      "score": 0.0006090429486365138,
+      "report_sha256": "b093971dd6417cc927f25cf79c7480af35618255cec24e567f34afb42d3bfde8",
+      "binding": {
+        "checkpoint_commit_sha256": "2148eaff325ffaed9756020122db59b198a996e2b8881094a06a0e1930e54218",
+        "norm_sha256": "a38a6a813e26aa410f6f117a6f5de108f5f08e36abf934f652ae9ccd901af18e",
+        "fixture_sha256": "16dd7c85355c30e77c842c371f03c58faa48163d6f22505b75130b58ae6e5c99",
+        "source_sha256": "e51bf0abd4bc3403fc2f973a4d9d52da1119e99c8d5c4ae0187b27234ae08625",
+        "batch_size": 16,
+        "noise": "fold_in(key20261115,batch_index)",
+        "sampler": "create_trained_policy._sample_actions(num_steps=10)"
+      }
+    },
+    {
+      "step": 3000,
+      "score": 0.0005897521519968254,
+      "report_sha256": "4a71bcb57f96b4688d44d45548f1e7391ab287f3e65a8927bd293d05da26352b",
+      "binding": {
+        "checkpoint_commit_sha256": "3a844a2cb7ed218cc1c070d98c7afa79d2c2f9cc901921d46623d68626491182",
+        "norm_sha256": "a38a6a813e26aa410f6f117a6f5de108f5f08e36abf934f652ae9ccd901af18e",
+        "fixture_sha256": "16dd7c85355c30e77c842c371f03c58faa48163d6f22505b75130b58ae6e5c99",
+        "source_sha256": "e51bf0abd4bc3403fc2f973a4d9d52da1119e99c8d5c4ae0187b27234ae08625",
+        "batch_size": 16,
+        "noise": "fold_in(key20261115,batch_index)",
+        "sampler": "create_trained_policy._sample_actions(num_steps=10)"
+      }
+    }
+  ],
+  "scope": "Fixed real-development generated-action diagnostics, not physical robot success."
+}

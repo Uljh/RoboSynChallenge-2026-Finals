@@ -1,0 +1,23 @@
+{
+  "state": "selected_mixed_VLA_and_geometry_offline_interface_passed",
+  "selected_step": 1500,
+  "fixed_REAL_validation_loss": 0.038701018654535346,
+  "real_observation_probe_count": 36,
+  "same_seed_repeatability": true,
+  "maximum_H800_194_action_difference": 0.014034999136811166,
+  "norm_sha256": "99b69e45879289942dc103a592405d2e24b8140fe28c8e600f369e7bde613315",
+  "geometry_sha256": "e3aa4bd4ac3aea54e5c39b3ace30829565767a52f0a671a2d958e8aff6e3088d",
+  "hybrid": {
+    "actual_selected_VLA": true,
+    "actual_geometry_checkpoint": true,
+    "recorded_sim_observation": true,
+    "natural_phase": "precision",
+    "precision_joint_action_test_passed": true,
+    "reset_passed": true,
+    "static_backend": true,
+    "closed_loop_physics": false,
+    "real_robot_calibration_verified": false
+  },
+  "real_robot_success_verified": false,
+  "scope": "Actual selected VLA plus learned geometry and bounded IK on recorded observations; no closed-loop physics or real-robot certification."
+}

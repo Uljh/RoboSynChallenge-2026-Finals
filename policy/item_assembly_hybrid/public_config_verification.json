@@ -1,0 +1,22 @@
+{
+  "state": "portable_public_config_model_and_transform_parity_passed",
+  "finished": 1794758720.5983262,
+  "public_config": "pi05_base_robosynchallenge_full",
+  "private_training_registration_required": false,
+  "private_V21_config_required": false,
+  "probes": [
+    {
+      "episode": 43,
+      "frame": 272,
+      "transform_difference": 0.0
+    },
+    {
+      "episode": 44,
+      "frame": 278,
+      "transform_difference": 0.0
+    }
+  ],
+  "model_loaded": false,
+  "selected_weight_loading_pending": true,
+  "source_sha256": "6036b809f5c4fed795d89de65f8e2e3ea3775464cb4d8fb8678d849048ce5a36"
+}

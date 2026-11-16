@@ -1,0 +1,135 @@
+{
+  "state": "selected_mixed_VLA_clean194_load_and_offline_hybrid_interface_verified",
+  "entry": "policy.item_assembly_hybrid.deploy_policy.get_model / eval / reset_model; or create_hybrid with clean-runtime base_policy",
+  "profile": "frozen_sim",
+  "real_robot_ready": false,
+  "files": {
+    "__init__.py": {
+      "bytes": 155,
+      "sha256": "0d84908e5540ff836ff677bd0dd68679a2e2215c872b635c46545ab8db6f0562"
+    },
+    "api.py": {
+      "bytes": 3452,
+      "sha256": "6b8ab241b8401e9ed3102600546e5f56be20217954fbe48e91867d3fcd66b50e"
+    },
+    "assets/guijiao_standard/1guijiao_standard.ply": {
+      "bytes": 28106,
+      "sha256": "a432f7e1a3fe9dd9507529ac5344f699f142f943b78e5b21005ea273d8e3d2cb"
+    },
+    "assets/guijiao_standard/2guijiao_standard.ply": {
+      "bytes": 33434,
+      "sha256": "4654d638c1c1ab48f916963f6620293de96c502e56ebb5cf94206a1182933502"
+    },
+    "assets/handoff_contract.json": {
+      "bytes": 628,
+      "sha256": "f3e0b14c58dd418db9c3b666c8f4ce695c8498db2c69d55d2764fd4f3035cde1"
+    },
+    "assets/robot_chain.json": {
+      "bytes": 2172,
+      "sha256": "81479d0dc10c40d7f773b60c593e66865efc9167c0778cb738cbf10ed026fa92"
+    },
+    "assets/stage_contract.json": {
+      "bytes": 2679,
+      "sha256": "29480089aff7412ef5aca79d8a998da0d88d59812f331766e01661879fd575ea"
+    },
+    "clean_import_smoke.json": {
+      "bytes": 581,
+      "sha256": "4db500760c195bb930fa09fc456a49abb26378a8703f798314658909a8a0c27a"
+    },
+    "controller.py": {
+      "bytes": 3432,
+      "sha256": "2dd66e1f42401229e1370b48ccc8ce4300eae956ba9190a6fe50db89376cce34"
+    },
+    "controller_parity.json": {
+      "bytes": 230,
+      "sha256": "f0448077903c0ea5804477fe85a522c288ef60a282fa6766d707c151cd9d06f0"
+    },
+    "controller_smoke.json": {
+      "bytes": 3005,
+      "sha256": "0906734b32a97d08a765d17d2de5a1b6620153e777f88f866c3125c4fdc6a974"
+    },
+    "deploy_policy.py": {
+      "bytes": 6805,
+      "sha256": "398064a83477bdf4739b98dd7418cc2303b0305fde6fb74ca9ca2bf0aba45f4b"
+    },
+    "deployment_versions.json": {
+      "bytes": 534,
+      "sha256": "4508ddff75b697ae1b0db78ecee575df4102603ff5344c09961410e2da4f5a4a"
+    },
+    "edge_refinement.py": {
+      "bytes": 3724,
+      "sha256": "3230f530db8aa462d1a12367f46a0991c2c13b65b0a92e83d1085643884ede8a"
+    },
+    "kinematic_gate.py": {
+      "bytes": 1841,
+      "sha256": "2c0b81793748147eebd47363635fdadcf2e805d82a8b987a00b527758e67bb9a"
+    },
+    "learned_geometry.py": {
+      "bytes": 3113,
+      "sha256": "3276bbe52790f2d567ebab07affa912842fcd323be6e2d10d3cfe2cfb5abccb4"
+    },
+    "learned_servo.py": {
+      "bytes": 2368,
+      "sha256": "814062381c70455312c76abfa9cd2c77a04b7f59cd6b9b9f01787d6c750fa2c6"
+    },
+    "local_ik.py": {
+      "bytes": 1387,
+      "sha256": "7c29d6e603ff0b2c3e57f5cdd40feadf9d160da079d3b00b1f7e8a1d56112e96"
+    },
+    "official_calibration_audit.json": {
+      "bytes": 6928,
+      "sha256": "a6fc13fbdc28b590232c7fde62e06fcf531d4009cbe5e5e9bee5238c39477b46"
+    },
+    "portable_verification.json": {
+      "bytes": 1251,
+      "sha256": "d014f9594772b85c5abf8f79f14b39060642dd17e7e3e745b0a514359abf417d"
+    },
+    "public_config_verification.json": {
+      "bytes": 601,
+      "sha256": "ac6980a49dbaf4b5917f549f69c0ce4238281028c0a12d12f7d06bae2fc4517d"
+    },
+    "README.md": {
+      "bytes": 6878,
+      "sha256": "30abd7abd1b7ff82bfdb558bd8938479ac3c507934bd5acf634f67b91a6e67d5"
+    },
+    "real_calibration_feasibility.json": {
+      "bytes": 1774,
+      "sha256": "56a5c4f90936f50da48148d8ecc469ad4652732d047269d1fd78caac83138e85"
+    },
+    "requirements.txt": {
+      "bytes": 284,
+      "sha256": "e808aef0ca0ccfca5f4cdb47988b02788bd44e490f31bb60f78d54454c60ec86"
+    },
+    "robot_fk.py": {
+      "bytes": 1081,
+      "sha256": "3aca5a582b95262658e7b5a9aeecd55c6287959e3f93a7cee564413d3d256eac"
+    },
+    "static_backend.py": {
+      "bytes": 2193,
+      "sha256": "d0325d48617a47ee263bd5a17f3614df655a33f7b5b852d26d5c040d64f275e1"
+    },
+    "wrist_model.py": {
+      "bytes": 909,
+      "sha256": "56d049b85c063cabea5e3a121a61278d3e32142e0b4f883a14d49d68fae7792a"
+    },
+    "selected_runtime_smoke.json": {
+      "bytes": 996,
+      "sha256": "c38a21a8f5687b3b6494fedf478f1795d4c29c49a48b5c9173992c3feca46f81"
+    }
+  },
+  "geometry_weight": {
+    "relative_delivery_path": "geometry_weights/full_fit_1000.pt",
+    "bytes": 3351176,
+    "sha256": "e3aa4bd4ac3aea54e5c39b3ace30829565767a52f0a671a2d958e8aff6e3088d"
+  },
+  "selected_VLA_checkpoint": {
+    "step": 1500,
+    "selection": "minimum fixed REAL validation loss",
+    "loss": 0.038701018654535346
+  },
+  "full_controller_runtime": "Selected mixed VLA plus geometry and bounded IK passed recorded-observation static-backend smoke; closed-loop physics and real robot unverified",
+  "clean_runtime": "194 actual selected checkpoint loaded; 36 probes and repeatability passed; no training config or LeRobot import",
+  "dependency_binding": "Unified ../szu_synapse/requirements.txt; scipy1.17.1 and trimesh4.12.2 verified in clean194; no duplicate headless cv2",
+  "release_documentation_update": "Selected step1500 and public geometry path documented; algorithm files unchanged.",
+  "release_text_format": "LF line endings normalized for the public Git archive; model and controller logic unchanged."
+}
