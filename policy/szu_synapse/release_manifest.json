@@ -118,7 +118,7 @@
   },
   "report": {
     "path": "policy/szu_synapse/report/SZU_VCC_Synapse_Technical_Report.pdf",
-    "sha256": "d725d6e73a0be0bceea9ba880c0969640f9cc82eca4fd036daf73d646bb3690d"
+    "sha256": "38d1323553277be1f9ee8bb7ab1aca49e995bba46b3968219b0a021825fb073a"
   },
   "evidence_scope": {
     "file_verification": "Published files checked against source SHA256 and sizes.",

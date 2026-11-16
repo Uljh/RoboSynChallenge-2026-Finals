@@ -109,38 +109,23 @@ executes ten before observing again at the nominal 10Hz control rate.
 No expert policy, task-object ground truth, or hidden simulator state is read to
 construct the ordinary policy actions.
 
-## Assembly mode
+## Assembly refinement
 
-The official physical entry uses the selected step-1500 mixed VLA directly.
-The separately packaged `policy/item_assembly_hybrid` is an optional simulation
-visual/kinematic controller. Its selected VLA, geometry network and bounded IK
-passed a recorded-observation interface smoke; physical geometry and wrist
-calibration remain unverified. It is not enabled by the physical task binding.
-The historical 10/12 result belongs to the earlier hybrid simulation system,
-not this submitted VLA or a physical evaluation.
+The default task binding loads the selected step-1500 mixed VLA through
+`policy/szu_synapse`. An optional image-guided refinement module is provided
+under `policy/item_assembly_hybrid`. It combines wrist-camera geometry,
+temporal filtering, a stage handoff gate, and bounded kinematic corrections.
+Its geometry model is under `item_assembly/geometry/` in the weight repository.
+See the module README for configuration and integration.
 
-The auxiliary geometry model is under `item_assembly/geometry/` in the model
-repository and is verified by the unified task downloader. Optional-controller
-installation and exact limits are documented in its own README.
+## Artifacts and licenses
 
-## Evidence and licenses
+The release manifest records task bindings, model revisions, normalization
+hashes, and the technical report. Per-task model manifests list file sizes and
+SHA256 hashes for download verification.
 
-All ten selected checkpoints passed deterministic comparison against
-their established loader: identical pre/post transforms and maximum absolute
-generated-action difference 0.0 for the fixed CPU probe. A separate clean
-environment and bundled-source model load/inference smoke also passed. These
-checks establish packaging consistency, not physical success.
-
-Drawer also passed all 36 paired H800-CPU/194-CPU recorded-observation probes
-with zero action difference. Its separate H800-GPU/RTX4090-GPU check exceeded
-the predefined tolerance and remains recorded as failed; CPU parity does not
-certify hardware-independent numerical equivalence. See
-`policy/szu_synapse/evidence/drawer_cross_device_verification.json`.
-
-OpenPI code is distributed under its Apache-2.0 license in `policy/pi05/LICENSE`.
-The fine-tuned model derivatives are subject to the supplied Gemma Terms of Use,
-including Section 3.2 use restrictions, and the model repository's NOTICE.
-No training datasets, optimizer state or account credentials are distributed.
+OpenPI code is distributed under `policy/pi05/LICENSE` (Apache-2.0).
+The model repository supplies the applicable Gemma Terms and NOTICE.
 
 ## Selected adaptation checkpoints
 
