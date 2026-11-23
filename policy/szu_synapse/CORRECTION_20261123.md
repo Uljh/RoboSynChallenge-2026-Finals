@@ -1,0 +1,85 @@
+# Timeout investigation — 23 November 2026
+
+Evaluation: `real_7957b8d0bf6047`. The organizer reported 600 seconds and 690
+issued actions for `items_handover`, episode 14. All ten submitted tasks use
+this adapter and are covered by the changes below.
+
+## Changes
+
+- Export `get_model`, `eval` and `reset_model` from the policy package so the
+  public evaluator can import the documented entry point.
+- Measure OpenPI sampling after device results are materialized on the host.
+- Stage the existing ten-action prefix with one device transfer.
+- Emit `SZU_TIMING` JSON lines for synchronized inference, observation encoding,
+  action preparation, each `env.step` round trip, and success-feedback checks.
+- Report an exception immediately with the failed phase and attempted/completed
+  action counts. Do not retry commands that might already have executed.
+
+Weights, normalization, task bindings, requirements, prediction horizon (50),
+execution prefix (10), model RNG behavior and environment limits are unchanged.
+The changes are entirely under `policy/`.
+
+## Timing boundaries
+
+`time_to_first_action_dispatch_s` starts at `reset_model` and ends immediately
+before the first `env.step`; it does not measure remote command acceptance.
+`policy_episode_elapsed_s` uses the same start and is emitted every chunk.
+The public evaluator calls `reset_model` after environment reset, so these
+fields exclude model loading and environment reset. Model construction has a
+separate `model_load_s` field. The evaluation host must supply the full official
+episode duration.
+
+`model_inference_s` includes input transforms, sampling, host synchronization
+and output transforms. `sampling_s` is the synchronized sampling subset.
+`observation_encode_s` measures conversion of an already received observation;
+it is not camera capture or network transport latency.
+
+`step_roundtrip_s` includes whatever the supplied `env.step` does: execution,
+feedback, observation production and transport. These components cannot be
+honestly separated through the public API, so `observation_transport_s`,
+`hardware_execution_s` and `official_total_episode_s` are null. The organizer's
+bridge timestamps are needed to complete that breakdown.
+
+## Outstanding interface question
+
+This candidate **still calls the public single-action `env.step`**. It does not
+claim to fix per-action network round trips. The organizer's notice asks for
+ordered chunk submission but does not specify its method, shapes, feedback or
+queue-cancellation semantics; the public simulation API provides no documented
+equivalent. Obtain that contract before implementing or submitting a chunk
+transport change. Do not guess a method name, bypass the environment wrapper,
+or replace measured state with commanded targets.
+
+## Reproduction
+
+In the existing evaluation Python environment, from the repository root:
+
+```bash
+python -m unittest policy.szu_synapse.test_runtime_contract -v
+```
+
+The contract suite exercises all ten task bindings across normal execution,
+success, termination and truncation; it also checks observation layout,
+invalid predictions, episode reset and a feedback error after command issue.
+It uses CPU tensors and test fixtures, not a physical robot or network.
+
+All ten actual frozen checkpoints passed CPU regression against the original
+fixed-fixture baseline: the complete 50-by-14 predictions and emitted action
+prefixes matched exactly. This is an offline contract check with synthetic
+observations and test feedback, not physical task evaluation.
+
+One native `items_handover` run on 194 / RTX 4090 completed 350 steps / 35 calls
+and stopped at the unchanged simulator step limit (task success: false).
+Cache was disabled. Environment creation took 39.41 s, model loading 13.11 s,
+and reset-to-observation 0.62 s. First action dispatch after reset took 42.41 s;
+subsequent synchronized inference had median 0.108 s; cumulative step round
+trips took 18.10 s. The reset-return-to-end episode time was 64.35 s. Policy
+telemetry agreed with the independent outer timer within 0.002 s. These are
+local simulation measurements, not evidence of reduced real-network latency.
+GPU0 was returned to its reservation manager after the run.
+
+See `correction_evidence_20261123.json` for per-task bindings and measurements.
+Physical-network batching, RTX 5090 timing, the organizer's episode 14 and
+real-robot end-to-end completion for all ten tasks remain untested. This
+diagnostic candidate is not ready for the automatic correction intake until
+the ordered chunk interface is confirmed and its implementation is verified.

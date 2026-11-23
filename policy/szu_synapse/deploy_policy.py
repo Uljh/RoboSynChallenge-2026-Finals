@@ -5,6 +5,11 @@ import sys
 import time
 import numpy as np
 
+try:
+    from .timing import EpisodeTiming
+except ImportError:
+    from timing import EpisodeTiming
+
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 from runtime import load_policy
@@ -44,6 +49,7 @@ def encode_observation(obs, prompt):
 
 class TaskPolicy:
     def __init__(self, args):
+        started = time.perf_counter()
         self.task = args['task_name']
         bindings = json.loads((ROOT / 'task_bindings.json').read_text())
         self.binding = bindings[self.task]
@@ -55,14 +61,26 @@ class TaskPolicy:
         if not 1 <= self.execute_steps <= 50:
             raise ValueError('execute_steps must be in 1..50')
         self.prompt = self.binding['prompt']
+        self.load_seconds = time.perf_counter() - started
+        self.timing = EpisodeTiming(self.task, self.load_seconds)
+        self.last_inference_timing = {}
 
     def infer(self, observation, *, noise=None):
-        result = self.policy.infer(encode_observation(observation, self.prompt), noise=noise)
+        started = time.perf_counter()
+        encoded = encode_observation(observation, self.prompt)
+        encoded_at = time.perf_counter()
+        result = self.policy.infer(encoded, noise=noise)
         actions = np.asarray(result['actions'], dtype=np.float32)
         if actions.shape != (50, 14) or not np.isfinite(actions).all():
             raise ValueError('Invalid policy action chunk')
         # Both simulator and real interface use absolute normalized gripper commands.
         actions[:, [6, 13]] = np.clip(actions[:, [6, 13]], 0, 1)
+        self.last_inference_timing = {
+            'observation_encode_s': encoded_at - started,
+            # CPU output materialization in Policy.infer waits for JAX sampling.
+            'model_inference_s': time.perf_counter() - encoded_at,
+            'sampling_s': result.get('policy_timing', {}).get('infer_ms', 0) / 1000,
+        }
         return actions
 
 def get_model(usr_args):
@@ -70,24 +88,66 @@ def get_model(usr_args):
 
 def eval(env, model, observation):
     import torch
-    started = time.perf_counter()
-    actions = model.infer(observation)[:model.execute_steps]
-    # np.asarray in infer waits for device execution, so this includes inference.
-    inference_times = [time.perf_counter() - started]
-    action_dim = int(np.prod(env.unwrapped.single_action_space.shape))
-    if action_dim != 14:
-        raise ValueError(f'Expected the official 14D action interface, got {action_dim}')
-    info = None
-    truncated = False
-    for action in actions:
-        tensor = torch.as_tensor(action, dtype=torch.float32, device=env.unwrapped.device).unsqueeze(0)
-        observation, reward, terminated, truncated, info = env.step(tensor)
-        if bool(_array(terminated).any()) or bool(_array(truncated).any()):
-            break
-        if env.get_wrapper_attr('is_task_success')():
-            break
-    return observation, info, truncated, inference_times
+    timing = model.timing
+    phase = 'inference'
+    step_times = []
+    feedback_times = []
+    actions_issued = 0
+    try:
+        timing.event('phase_start', phase=phase)
+        started = time.perf_counter()
+        actions = model.infer(observation)[:model.execute_steps]
+        inference_times = [time.perf_counter() - started]
+        phase = 'action_preparation'
+        started = time.perf_counter()
+        action_dim = int(np.prod(env.unwrapped.single_action_space.shape))
+        if action_dim != 14:
+            raise ValueError(f'Expected the official 14D action interface, got {action_dim}')
+        # Stage the already predicted prefix with one device transfer. The public
+        # simulator has only step(); do not invent a real-robot chunk RPC here.
+        tensors = torch.as_tensor(actions, dtype=torch.float32,
+                                  device=env.unwrapped.device).unsqueeze(1)
+        if tensors.is_cuda:
+            torch.cuda.synchronize(tensors.device)
+        prepare_s = time.perf_counter() - started
+        info = None
+        truncated = False
+        stopped = None
+        timing.event('phase_start', phase='execution_feedback', requested_actions=len(tensors))
+        for tensor in tensors:
+            phase = 'env.step'
+            started = time.perf_counter()
+            # On an exception the action may already have reached the robot.
+            # Never retry or synthesize a replacement observation.
+            timing.dispatch()
+            actions_issued += 1
+            observation, reward, terminated, truncated, info = env.step(tensor)
+            # Include completion of the returned flags in the round-trip timing.
+            is_terminated = bool(_array(terminated).any())
+            is_truncated = bool(_array(truncated).any())
+            step_times.append(time.perf_counter() - started)
+            if is_terminated or is_truncated:
+                stopped = 'terminated' if is_terminated else 'truncated'
+                break
+            phase = 'success_feedback'
+            started = time.perf_counter()
+            success = env.get_wrapper_attr('is_task_success')()
+            feedback_times.append(time.perf_counter() - started)
+            if success:
+                stopped = 'success'
+                break
+        timing.record(inference_times[0], model.last_inference_timing, prepare_s,
+                      step_times, feedback_times, stopped)
+        return observation, info, truncated, inference_times
+    except Exception as exc:
+        timing.event('unrecoverable_error', phase=phase,
+                     attempted_actions_this_call=actions_issued,
+                     completed_actions_this_call=len(step_times),
+                     error_type=type(exc).__name__, error=str(exc),
+                     retry_performed=False)
+        raise
 
 def reset_model(model):
-    # Receding-horizon inference has no observation/action queue between calls.
-    pass
+    # The evaluator calls this after env.reset; do not reset the model RNG or
+    # invent observations. Keep model behavior identical to the submitted policy.
+    model.timing.reset()
