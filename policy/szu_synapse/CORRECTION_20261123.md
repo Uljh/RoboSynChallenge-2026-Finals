@@ -34,6 +34,28 @@ required** by this correction. No official chunk RPC integration is claimed.
 The default path continues to call `env.step` per action; this change removes
 additional success polling, not all possible transport round trips.
 
+## Public interface references checked on 23 November
+
+The official [SmolVLA adapter, lines 359–395](https://github.com/EDEM-AI/RoboSynChallenge/blob/45d9b9c4c78c66ef340a055697f3ad833ce567f4/policy/smolvla/deploy_policy.py#L359-L395)
+obtains an action prefix, executes it through sequential `env.step` calls,
+checks returned truncation, and returns the last measured observation without
+an explicit per-action success query. Our default follows that public execution
+pattern and also honors returned termination. This is a reference for the
+adapter structure, not evidence of how the private bridge batches transport.
+
+The [finals FAQ](https://robosyn-bench.net/faq/#finals) says that success ends an
+episode manually, that inference and execution are serial, and that participants
+should refer to simulation code while the organizers adapt the private runtime.
+The public repository history after 27 October, branches, deployment tutorial
+and FAQ did not reveal a separate documented chunk-submission API. The three
+main-branch commits integrated after that date concern gripper ranges, arm
+assets and joint limits; no policy deployment interface change was found.
+
+The standard loop alone establishes neither one network round trip per action
+nor complete chunk transport. The current correction removes extra success
+queries; official bridge measurements are still needed to verify the transport
+behavior and the 600-second limit in the timeout notification.
+
 ## Validation
 
 From the repository root in the existing evaluation Python environment:
