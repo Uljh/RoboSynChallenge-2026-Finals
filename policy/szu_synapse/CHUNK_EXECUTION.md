@@ -1,5 +1,10 @@
 # Ordered action-chunk integration
 
+**Experimental, not enabled by the finals correction.** The submitted correction
+uses the existing `env.step` entry with `success_check_mode=manual`; no executor
+binding is required. This optional interface has only fixture-based transport
+tests and is not an implementation of the official robot bridge.
+
 The policy can now provide its ten-action execution prefix in one call. The
 robot host must connect this to its supported ordered-execution interface.
 This document defines our adapter boundary; it does not name or implement an

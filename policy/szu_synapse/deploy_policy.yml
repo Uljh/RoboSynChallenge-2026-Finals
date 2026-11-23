@@ -12,4 +12,5 @@ eval_video_obs_keys: [cam_high, cam_left_wrist, cam_right_wrist]
 eval_expert_check: false
 checkpoint_path: null
 execute_steps: 10
+success_check_mode: manual
 jax_platform: null

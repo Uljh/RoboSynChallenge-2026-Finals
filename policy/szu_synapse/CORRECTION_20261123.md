@@ -1,106 +1,85 @@
-# Timeout investigation — 23 November 2026
+# Finals timeout correction — 23 November 2026
 
-Evaluation: `real_7957b8d0bf6047`. The organizer reported 600 seconds and 690
-issued actions for `items_handover`, episode 14. All ten submitted tasks use
-this adapter and are covered by the changes below.
+Evaluation: `real_7957b8d0bf6047`, team `finalist_18`. This correction covers all
+ten registered tasks sharing `policy/szu_synapse`.
 
-## Changes
+## Change to use for evaluation
 
-- Export `get_model`, `eval` and `reset_model` from the policy package so the
-  public evaluator can import the documented entry point.
-- Measure OpenPI sampling after device results are materialized on the host.
-- Stage the existing ten-action prefix with one device transfer.
-- Emit `SZU_TIMING` JSON lines for synchronized inference, observation encoding,
-  action preparation, each `env.step` round trip, and success-feedback checks.
-- Report an exception immediately with the failed phase and attempted/completed
-  action counts. Do not retry commands that might already have executed.
-- Separate prediction from execution and expose the unchanged ten-action
-  prefix. Add an explicitly bound ordered executor with one dispatch per prefix,
-  measured-observation validation, stop handling and latched execution failures.
-  The host integration contract is in [CHUNK_EXECUTION.md](CHUNK_EXECUTION.md).
+Use the existing task commands, weights and policy entry. The model default and
+`deploy_policy.yml` now set `success_check_mode: manual`. This removes the
+policy's per-action `get_wrapper_attr("is_task_success")()` calls. The organizer
+FAQ states that physical success/episode completion is handled manually.
 
-Weights, normalization, task bindings, requirements, prediction horizon (50),
-execution prefix (10), model RNG behavior and environment limits are unchanged.
-The changes are entirely under `policy/`.
+Every issued action still uses the existing `env.step` interface. The policy
+checks returned `terminated` and `truncated` flags after each action and stops
+immediately on either. It returns the final measured observation unchanged for
+the next prediction. No commanded state is substituted for feedback. Exceptions
+are reported with their phase and attempted/completed counts, then raised
+without retry. The host remains responsible for manual success/end-of-episode
+control, including halting execution through its existing environment/SDK.
 
-## Timing boundaries
+The model still predicts 50 actions and executes the first 10, with earlier
+termination/truncation honored. There is no new mid-chunk inference or history
+processing. Checkpoints, normalization, task bindings, dependencies, model RNG,
+action conversion and environment limits are unchanged. The only new deployment
+setting is `success_check_mode`; no changes to registered task commands or HF
+locations are required. All runtime changes are under `policy/`.
 
-`time_to_first_action_dispatch_s` starts at `reset_model` and ends immediately
-before the first `env.step` or bound executor call; it does not measure remote command acceptance.
-`policy_episode_elapsed_s` uses the same start and is emitted every chunk.
-The public evaluator calls `reset_model` after environment reset, so these
-fields exclude model loading and environment reset. Model construction has a
-separate `model_load_s` field. The evaluation host must supply the full official
-episode duration.
+For local simulation, append `--success_check_mode per_step` to retain the old
+per-action success checks. Mode selection is explicit; the policy does not
+probe the host type or guess private robot methods.
 
-`model_inference_s` includes input transforms, sampling, host synchronization
-and output transforms. `sampling_s` is the synchronized sampling subset.
-`observation_encode_s` measures conversion of an already received observation;
-it is not camera capture or network transport latency.
+The optional executor described in `CHUNK_EXECUTION.md` is **not enabled or
+required** by this correction. No official chunk RPC integration is claimed.
+The default path continues to call `env.step` per action; this change removes
+additional success polling, not all possible transport round trips.
 
-`step_roundtrip_s` includes whatever the supplied `env.step` does: execution,
-feedback, observation production and transport. These components cannot be
-honestly separated through the public API, so `observation_transport_s`,
-`hardware_execution_s` and `official_total_episode_s` are null. The organizer's
-bridge timestamps are needed to complete that breakdown.
+## Validation
 
-With a bound executor, `chunk_roundtrip_s` covers the complete request. Optional
-`observation_transport_s` and `execution_feedback_s` come from that executor's
-instrumentation, not estimates from the round-trip duration. Unknown fields
-remain null; they must not be added to the round-trip time as independent costs.
-
-## Outstanding interface question
-
-Without an explicitly bound executor, this candidate **still calls the public
-single-action `env.step`**. The new chunk path is implemented and tested against
-an ordered execution fixture, but no official robot transport is wired to it.
-The organizer's notice does not specify the SDK method, feedback or cancellation
-semantics. A verified bridge implementing `CHUNK_EXECUTION.md` is still needed
-before the new path can reduce real-network round trips. No guessed SDK method
-or automatic interface detection is used.
-
-## Reproduction
-
-In the existing evaluation Python environment, from the repository root:
+From the repository root in the existing evaluation Python environment:
 
 ```bash
-python -m unittest policy.szu_synapse.test_runtime_contract policy.szu_synapse.test_chunk_execution -v
-python -m policy.szu_synapse.benchmark_chunk_transport
+python -m unittest policy.szu_synapse.test_runtime_contract policy.szu_synapse.test_chunk_execution policy.szu_synapse.test_manual_success -v
 ```
 
-The contract suite exercises all ten task bindings across normal execution,
-success, termination and truncation; it also checks observation layout,
-invalid predictions, episode reset and a feedback error after command issue.
-All 14 test methods passed. The chunk suite adds per-task sequential/chunk
-comparisons, stale/malformed responses, partial errors, unknown completion,
-measured next observations and stop/failure latches. These tests use CPU tensors
-and fixtures, not a physical robot or network.
+All 20 test methods passed on 194 CPU. Manual-mode tests cover all ten tasks
+with normal execution, termination and truncation (30 task/stop combinations),
+zero success-predicate access, exact action order, final measured feedback,
+next-prediction input, error-after-dispatch handling and configuration defaults.
+The explicit simulation mode retains its original success stopping behavior.
 
-Latency injection exercises 10-action prefixes with 0.1/0.3/0.5 seconds per
-request. The fixture's client request count falls from 10 (or 20 when success
-feedback is also remote) to one. It excludes physical execution time and does
-not measure the official network. Raw results are in
-`chunk_evidence_20261123.json`.
+All ten actual frozen checkpoints were reloaded and tested on CPU with fixed
+synthetic observations and mock environment feedback. Complete 50-by-14
+predictions match the original frozen baseline. Normal, terminated and truncated
+execution prefixes also match. In the synthetic success-only case, manual mode
+intentionally continues the existing prefix instead of consulting the simulation
+success predicate; host stop flags still stop execution. Every tested manual
+call made zero explicit success queries. Per-task hashes, timings and source
+fingerprints are in `manual_success_evidence_20261123.json`.
 
-All ten actual frozen checkpoints passed CPU regression against the original
-fixed-fixture baseline: the complete 50-by-14 predictions and emitted action
-prefixes matched exactly. This is an offline contract check with synthetic
-observations and test feedback, not physical task evaluation.
+These are inference and adapter regression tests, not physical task scores.
+The earlier native RTX4090 handover simulation is historical evidence from
+commit `6e20dda245f6d66030698b31900395872171958c`, not a real-robot validation of
+this new mode. Historical diagnostic/chunk fixtures remain separately recorded
+in `correction_evidence_20261123.json` and `chunk_evidence_20261123.json`.
 
-On the preceding diagnostic commit `6e20dda245f6d66030698b31900395872171958c`,
-one native `items_handover` run on 194 / RTX 4090 completed 350 steps / 35 calls
-and stopped at the unchanged simulator step limit (task success: false).
-Cache was disabled. Environment creation took 39.41 s, model loading 13.11 s,
-and reset-to-observation 0.62 s. First action dispatch after reset took 42.41 s;
-subsequent synchronized inference had median 0.108 s; cumulative step round
-trips took 18.10 s. The reset-return-to-end episode time was 64.35 s. Policy
-telemetry agreed with the independent outer timer within 0.002 s. These are
-local simulation measurements, not evidence of reduced real-network latency.
-GPU0 was returned to its reservation manager after the run.
+## Timing and untested cases
 
-See `correction_evidence_20261123.json` for per-task bindings and measurements.
-Physical-network batching, RTX 5090 timing, the organizer's episode 14 and
-real-robot end-to-end completion for all ten tasks remain untested. This
-candidate is not ready to claim a real-transport timeout fix until the host
-executor is integrated and verified. No checkpoint, dependency or task-binding
-change is required by the new adapter boundary.
+`SZU_TIMING` logs model loading, reset-to-first-action dispatch, synchronized
+inference, observation encoding, action preparation, per-step round trips,
+success-poll timings (empty in manual mode), and policy episode elapsed time.
+The model sampling timer is synchronized through host output materialization.
+Policy episode timing starts at `reset_model`, after environment reset; it
+excludes environment creation/reset and model loading. It does not measure
+remote acceptance of the first command.
+
+The supplied `env.step` is opaque. Observation/transport, hardware execution and
+full official episode time cannot be separately measured from it; unavailable
+fields stay null rather than being inferred from model time. The evaluation
+host should correlate policy logs with its bridge/robot timestamps.
+
+Untested for all ten tasks: official robot transport and manual stop propagation,
+RTX5090 timing, physical end-to-end runtime and task success. The organizer's
+reported items_handover episode 14 (600 seconds / 690 issued actions) has not
+been reproduced. This is a conservative polling reduction for organizer
+acceptance testing, not a claim that the 600-second timeout is resolved.

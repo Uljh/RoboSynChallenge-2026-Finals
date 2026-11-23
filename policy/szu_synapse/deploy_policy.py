@@ -52,6 +52,11 @@ def encode_observation(obs, prompt):
 class TaskPolicy:
     def __init__(self, args):
         started = time.perf_counter()
+        # Finals success is judged by the host. Simulation can explicitly keep
+        # its per-action success predicate; never guess the host type via RPC.
+        self.success_check_mode = args.get('success_check_mode', 'manual')
+        if self.success_check_mode not in ('manual', 'per_step'):
+            raise ValueError('success_check_mode must be manual or per_step')
         self.task = args['task_name']
         bindings = json.loads((ROOT / 'task_bindings.json').read_text())
         self.binding = bindings[self.task]
@@ -168,7 +173,8 @@ def _eval_sequential(env, model, observation):
         info = None
         truncated = False
         stopped = None
-        timing.event('phase_start', phase='execution_feedback', requested_actions=len(tensors))
+        timing.event('phase_start', phase='execution_feedback', requested_actions=len(tensors),
+                     success_check_mode=model.success_check_mode)
         for tensor in tensors:
             phase = 'env.step'
             started = time.perf_counter()
@@ -184,13 +190,14 @@ def _eval_sequential(env, model, observation):
             if is_terminated or is_truncated:
                 stopped = 'terminated' if is_terminated else 'truncated'
                 break
-            phase = 'success_feedback'
-            started = time.perf_counter()
-            success = env.get_wrapper_attr('is_task_success')()
-            feedback_times.append(time.perf_counter() - started)
-            if success:
-                stopped = 'success'
-                break
+            if model.success_check_mode == 'per_step':
+                phase = 'success_feedback'
+                started = time.perf_counter()
+                success = env.get_wrapper_attr('is_task_success')()
+                feedback_times.append(time.perf_counter() - started)
+                if success:
+                    stopped = 'success'
+                    break
         timing.record(inference_times[0], model.last_inference_timing, prepare_s,
                       step_times, feedback_times, stopped)
         return observation, info, truncated, inference_times

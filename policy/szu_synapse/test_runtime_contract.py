@@ -65,6 +65,7 @@ class FeedbackFixture:
 class ContractTests(unittest.TestCase):
     def make_model(self, task='items_handover', **args):
         underlying = ModelFixture()
+        args.setdefault('success_check_mode', 'per_step')
         with patch.object(adapter, 'load_policy', return_value=underlying):
             model = adapter.get_model(dict(task_name=task, **args))
         return model, underlying

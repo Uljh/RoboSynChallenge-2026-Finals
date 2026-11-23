@@ -100,6 +100,14 @@ uses the official interface and returns observation, info, truncation and
 inference durations. `reset_model(model)` discards no hidden task information;
 ordinary inference keeps no action queue between calls.
 
+For the finals correction, `success_check_mode` defaults to `manual` in both
+the model and deployment YAML. The policy does not call `is_task_success()`;
+the host controls success and episode completion. Step-returned termination,
+truncation and measured observations are still honored. For local simulation
+with the original per-action success checks, append
+`--success_check_mode per_step` to the task command. See
+[correction notes](policy/szu_synapse/CORRECTION_20261123.md) for validation.
+
 Images are HWC RGB/RGBA arrays under `sensor.cam_high.color`,
 `sensor.cam_left_wrist.color` and `sensor.cam_right_wrist.color`. A single
 environment batch dimension is accepted. `robot.qpos` is the 14D active state;
@@ -108,7 +116,8 @@ The output is 14 absolute targets: six left joints, left gripper, six right
 joints, right gripper. Joint units are radians, grippers are ratios in [0,1].
 Gripper outputs are clipped to that command range. No simulated finger-travel
 multiplier is applied to the real interface. The model predicts 50 actions and
-executes ten before observing again at the nominal 10Hz control rate.
+executes up to ten before the next prediction at the nominal 10Hz control rate.
+The next prediction uses the actual observation returned by the environment.
 
 No expert policy, task-object ground truth, or hidden simulator state is read to
 construct the ordinary policy actions.
