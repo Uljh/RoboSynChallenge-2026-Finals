@@ -57,3 +57,24 @@ class EpisodeTiming:
             official_total_episode_s=None,
             clock_scope='since reset_model; excludes model load and environment reset',
         )
+
+    def record_batch(self, inference_s, inference_detail, roundtrip_s, result):
+        self.calls += 1
+        self.actions += int(result.executed_steps)
+        self.inference_s += inference_s
+        self.step_s += roundtrip_s
+        self.event(
+            'chunk_complete', requested_mode='explicit_bound_chunk_executor',
+            request_id=result.request_id, executed_steps=int(result.executed_steps),
+            time_to_first_action_dispatch_s=self.first_dispatch_s,
+            model_load_s=self.load_seconds, inference_total_s=inference_s,
+            **inference_detail, chunk_roundtrip_s=roundtrip_s,
+            cumulative_inference_s=self.inference_s,
+            cumulative_execution_roundtrip_s=self.step_s,
+            observation_transport_s=result.observation_transport_s,
+            execution_feedback_s=result.execution_feedback_s,
+            official_total_episode_s=None,
+            stop_reason=('terminated' if result.terminated else 'truncated' if result.truncated
+                         else 'success' if result.success else None),
+            clock_scope='since reset_model; excludes model load and environment reset',
+        )

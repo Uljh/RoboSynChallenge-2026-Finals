@@ -1,0 +1,371 @@
+{
+  "date": "2026-11-23",
+  "baseline_commit": "f047e038a42bcafb1bb6147e7fa09a5e5d5a4349",
+  "tested_source_sha256": {
+    "policy/szu_synapse/__init__.py": "7dfd07b369ea479bb32277e75dfa50fc980eb8f46b261e28d624de9509e33ed3",
+    "policy/szu_synapse/deploy_policy.py": "cf4e99314fe5f252fb7c9f22268379b9c80263f8370d4280fbdba98f3621236c",
+    "policy/szu_synapse/chunk_execution.py": "f0a6abed2127da7bd414fa82e7cc141be09f91a363d8a9c6dfc91b5d63c6d019",
+    "policy/szu_synapse/timing.py": "6cce333cb6753c347eab5ddefbe258c691a626c479d1ba2da025ec7403011cd5",
+    "policy/szu_synapse/test_runtime_contract.py": "4a675ba41f0806e2552f1fca8028e4143c8cff365de57fd9e42f01f62fd0a34f",
+    "policy/szu_synapse/test_chunk_execution.py": "204257aeb7bf1744754c9fd3c7179769b200603c93bbfa2d17829e273976b037",
+    "policy/szu_synapse/benchmark_chunk_transport.py": "dee56ba4195e754cfa7c55ce55a886266c6068ebb5540a4be6cdee9cea3052cf"
+  },
+  "unchanged_contract_sha256": {
+    "policy/szu_synapse/task_bindings.json": "c839c188255d9752dd1ba62bba1f1ce63d94d7a60009dcb346b8bbc76fe5c847",
+    "policy/szu_synapse/release_manifest.json": "ff6b2d635098088b6a4964cd143a7e270023217cd59d072c8653dbbb707a25a8",
+    "policy/szu_synapse/runtime.py": "cd5f478b62af88043b0a24432b525495be9b3cc9a2859eba386a4746e0e8beb8",
+    "policy/szu_synapse/deploy_policy.yml": "0a34695a7eddbeb40c1d14f83a985be7164550d3ad83d2aa7798a1e1d5055261",
+    "policy/szu_synapse/requirements-cuda128.txt": "f74808f04c7e89623cea3eca78edfa52c24dd2e0f1a0b6a4a98770e4463af171",
+    "policy/szu_synapse/eval.sh": "60255e81bf8ac8311d92d16b0b87cd735e147f4900c1f0402bb5c12c254c6235"
+  },
+  "unchanged_contract_hash_basis": "Original Git blobs; normalize Windows CRLF checkout line endings to LF",
+  "unit_test_methods_passed": 14,
+  "unit_test_command": "python -m unittest policy.szu_synapse.test_runtime_contract policy.szu_synapse.test_chunk_execution -v",
+  "test_host": "194 CPU; no GPU allocated for this follow-up",
+  "lint": "ruff check --select F passed on the changed runtime/test modules",
+  "per_task": {
+    "items_handover": {
+      "actual_checkpoint_cpu_prediction_and_sequential_prefix_match": true,
+      "sequential_vs_chunk_fixture_stop_cases": [
+        "none",
+        "success",
+        "terminated",
+        "truncated"
+      ],
+      "step": 1500,
+      "norm_sha256": "07334ff9e1d7c0b1e26353b6eb9fc31a6b18ce6c5013b13483805eee0207c339",
+      "model_revision": "5a9a7363e034bb40654ed906a894b1e427926204",
+      "rounds": [
+        {
+          "stop": "none",
+          "steps": 10,
+          "chunk_sha256": "6aa4ec35b886bd370bf4ccb6396992c6a874711e04f6c9c6518a3befea94ddf0",
+          "issued_sha256": "152d26e907126fef0de30e5e100ba81e1c48b45983809649b857cfb38eeab4b8"
+        },
+        {
+          "stop": "terminated",
+          "steps": 3,
+          "chunk_sha256": "afbf8821ed0e165ddbd2dae23cea313fc497d36b60aa0d9ea388f93ab3640260",
+          "issued_sha256": "ed49938aaf90d2e9dd29078deaa28192d2de1186cde3a783c77262d58b1e7c18"
+        },
+        {
+          "stop": "truncated",
+          "steps": 2,
+          "chunk_sha256": "826e9bd96b4499775a5d698d65f76089116ab52a2c6eddb88a6747666827eac3",
+          "issued_sha256": "41f0235a0a85321d201a4f6fbc9adc408fe544023b5167705d9b2c755bb4187e"
+        },
+        {
+          "stop": "success",
+          "steps": 4,
+          "chunk_sha256": "772efe8d51473ce914b2e678d84c2e05769b22e248ddfe81917b7f01ea24a2c5",
+          "issued_sha256": "4c7505b54069ac1d0ad194442926f4e872c3738e34583d92b053f9b7d00733f3"
+        }
+      ],
+      "physical_chunk_transport_tested": false
+    },
+    "click_bell": {
+      "actual_checkpoint_cpu_prediction_and_sequential_prefix_match": true,
+      "sequential_vs_chunk_fixture_stop_cases": [
+        "none",
+        "success",
+        "terminated",
+        "truncated"
+      ],
+      "step": 1500,
+      "norm_sha256": "55fa8becde451e6ed05ba6de5cba56165ce98a46ee6d0fd808b7f8409dbbfdef",
+      "model_revision": "f6abb22589b49c8c4967c13dafd3fcdc1fb7631e",
+      "rounds": [
+        {
+          "stop": "none",
+          "steps": 10,
+          "chunk_sha256": "b54c0faa8f84d9a4b862e557be30747973415450baa42ea941c0c805a7b3d922",
+          "issued_sha256": "d57486f73f996a3267c50e0d5f8dfdbe77a2c72eecf8da4e54f53e9c3e390600"
+        },
+        {
+          "stop": "terminated",
+          "steps": 3,
+          "chunk_sha256": "318a26ed8669abc5baf1fae9c6ffd6c30b2fcc68b8e589f0c8f318cce2bde2f6",
+          "issued_sha256": "c541546f2a04ce93c031bcef7d40a65713a208047bf33731f1ce9ec7580e746c"
+        }
+      ],
+      "physical_chunk_transport_tested": false
+    },
+    "handle_basket": {
+      "actual_checkpoint_cpu_prediction_and_sequential_prefix_match": true,
+      "sequential_vs_chunk_fixture_stop_cases": [
+        "none",
+        "success",
+        "terminated",
+        "truncated"
+      ],
+      "step": 1500,
+      "norm_sha256": "6dd83d25d4884a51a1da413d8af6f6bcf3032bb1100b62c2f4b054116e280e36",
+      "model_revision": "34db9286780fa017a83533e15b579984943f7118",
+      "rounds": [
+        {
+          "stop": "none",
+          "steps": 10,
+          "chunk_sha256": "d56c29bf1704ff412dc48418adb99048ba04c6e17f775c23104a50bd24298ef6",
+          "issued_sha256": "1d835f929bea9337d244a56a4691c40fcb989fc883e05d707bf7e732e68c8cdf"
+        },
+        {
+          "stop": "terminated",
+          "steps": 3,
+          "chunk_sha256": "92828d4dbf8617fa13ac232724a415c9190bffad2961c7da26ef358697b5de5b",
+          "issued_sha256": "8c08192ee260c40b8f089f74800016f750bbd9ad0d7f4106ed1c73ec469e732d"
+        }
+      ],
+      "physical_chunk_transport_tested": false
+    },
+    "sample_loading": {
+      "actual_checkpoint_cpu_prediction_and_sequential_prefix_match": true,
+      "sequential_vs_chunk_fixture_stop_cases": [
+        "none",
+        "success",
+        "terminated",
+        "truncated"
+      ],
+      "step": 1500,
+      "norm_sha256": "1699122165f94b2e48663dd487f46aa27733e9a04bbec48da13348f47b83d721",
+      "model_revision": "6b8ae1392afe3d7c36333745e69d1184c01a159d",
+      "rounds": [
+        {
+          "stop": "none",
+          "steps": 10,
+          "chunk_sha256": "dbdec3a79a89b26eefcd8055bb108cea885a39e0a01b1162dbd4b2f628277cd6",
+          "issued_sha256": "2c9cbe5d34e2831b21caa346c22880e3394fe33316e7ed6367fa3a7112c701d3"
+        },
+        {
+          "stop": "terminated",
+          "steps": 3,
+          "chunk_sha256": "e367a7f214723abe0fb4e74e68ff33548d7641dd4cba6140f26f0f79f80a456e",
+          "issued_sha256": "aa30607c6718777b997ae88c76f385fb9af5a5dff75771ac57d784a01e208b85"
+        }
+      ],
+      "physical_chunk_transport_tested": false
+    },
+    "mixer_operating": {
+      "actual_checkpoint_cpu_prediction_and_sequential_prefix_match": true,
+      "sequential_vs_chunk_fixture_stop_cases": [
+        "none",
+        "success",
+        "terminated",
+        "truncated"
+      ],
+      "step": 4000,
+      "norm_sha256": "1c1ab5f222ddf51ff993d723f5facdfcbf197dcdcb2e5c6166af80490135ef2e",
+      "model_revision": "39c9435e0bcfcd60363be36adc80db44fa053173",
+      "rounds": [
+        {
+          "stop": "none",
+          "steps": 10,
+          "chunk_sha256": "225d76228dc3d0cf2b2b54ad9fa174512f5248fd0777d4a3252de736e0307b07",
+          "issued_sha256": "84f0405a3d8044c63f2e61d5dbc392380a32382363f0a95a13273fee54f3aec4"
+        },
+        {
+          "stop": "terminated",
+          "steps": 3,
+          "chunk_sha256": "a76690094f493bec71d4b7413d9893fcd30b8f61442f601ff7a12ad3d89c6f49",
+          "issued_sha256": "74bf72301daf444b82481ef6ebcb41c5c8c70b87cbdbf6fc6bb09df50c5beb1f"
+        }
+      ],
+      "physical_chunk_transport_tested": false
+    },
+    "table_rearrangement": {
+      "actual_checkpoint_cpu_prediction_and_sequential_prefix_match": true,
+      "sequential_vs_chunk_fixture_stop_cases": [
+        "none",
+        "success",
+        "terminated",
+        "truncated"
+      ],
+      "step": 1500,
+      "norm_sha256": "06241c2b80f8ab8347b68a0779e9a67814506cd19c3c67b3b1f7a743112e3148",
+      "model_revision": "df18a54218daa7e52b7e9548372d4d71dca387fa",
+      "rounds": [
+        {
+          "stop": "none",
+          "steps": 10,
+          "chunk_sha256": "f499b86df5bc83896e6cb9d6752aa1cf54a68ee2b5510e8226ea6e970199a7e6",
+          "issued_sha256": "d3bd49c81996aa56f1cc7e01cdc6b385d47171955c41b69ca0bb111d3b691e2a"
+        },
+        {
+          "stop": "terminated",
+          "steps": 3,
+          "chunk_sha256": "1c58574f08481e6fe446222063968bbe7ab6ce7e8630017ebc00a5428ae39f37",
+          "issued_sha256": "45a52c68de4e953b86fc04691f68ef176f0b48c1abe164bcd78034471ef94ddd"
+        }
+      ],
+      "physical_chunk_transport_tested": false
+    },
+    "manipulate_pipette": {
+      "actual_checkpoint_cpu_prediction_and_sequential_prefix_match": true,
+      "sequential_vs_chunk_fixture_stop_cases": [
+        "none",
+        "success",
+        "terminated",
+        "truncated"
+      ],
+      "step": 2000,
+      "norm_sha256": "a3ac064b4205bec093accced9b79d968919db97c434afed90a7a4b074c517fed",
+      "model_revision": "1bc163883e2af4ac1697d91f50bd393643830030",
+      "rounds": [
+        {
+          "stop": "none",
+          "steps": 10,
+          "chunk_sha256": "bdf4f035290277d373e8784a9bad6a1b3d65b1a95e9e8405bd330fc859d07639",
+          "issued_sha256": "c94eee57a94b68623a63e2ed6a26b9a53d8bb43b9e4a60347090b7b10ee87047"
+        },
+        {
+          "stop": "terminated",
+          "steps": 3,
+          "chunk_sha256": "1f8b3b64daf9d2d3b15ac83a7904d8d96dfae8ed74f0f471792b3d2d6f039b16",
+          "issued_sha256": "cb0a0d9595000b60a43f3388dca518d73a90201658300bb9a9afcdeef6bd2002"
+        }
+      ],
+      "physical_chunk_transport_tested": false
+    },
+    "water_pouring": {
+      "actual_checkpoint_cpu_prediction_and_sequential_prefix_match": true,
+      "sequential_vs_chunk_fixture_stop_cases": [
+        "none",
+        "success",
+        "terminated",
+        "truncated"
+      ],
+      "step": 1500,
+      "norm_sha256": "00a0bcbe04a6ed06b191deed185083bd8ca58788539e97b800490ed23fcea803",
+      "model_revision": "a414d47aa39ae3ee82bf78e413ab458b204103b3",
+      "rounds": [
+        {
+          "stop": "none",
+          "steps": 10,
+          "chunk_sha256": "00e270165d861ad48b8f6336d7edfd3aed560ca4f4a12f26c37e29e2e89da2e4",
+          "issued_sha256": "5a46306ae59bc3f4bf3fc91d5d1b72d71e64a81ff186ada7fb3ecf65448a77dd"
+        },
+        {
+          "stop": "terminated",
+          "steps": 3,
+          "chunk_sha256": "2118b45116aedc23fff4e2c5f98b7b793be10d26440a3a9afdcd55389bb821d2",
+          "issued_sha256": "f648c2139d3d5154d02732d512c41aa1807b79236c6b0fe13db6673b39169e5a"
+        }
+      ],
+      "physical_chunk_transport_tested": false
+    },
+    "item_assembly": {
+      "actual_checkpoint_cpu_prediction_and_sequential_prefix_match": true,
+      "sequential_vs_chunk_fixture_stop_cases": [
+        "none",
+        "success",
+        "terminated",
+        "truncated"
+      ],
+      "step": 1500,
+      "norm_sha256": "99b69e45879289942dc103a592405d2e24b8140fe28c8e600f369e7bde613315",
+      "model_revision": "cf8760f5f44fdaae3a65674309096d383e9a3cde",
+      "rounds": [
+        {
+          "stop": "none",
+          "steps": 10,
+          "chunk_sha256": "6a98255ccb9d1acab672cabf921f78f9e8592f804a142028f71cf1be0705f3ab",
+          "issued_sha256": "268e452697f5352356a5b77fa88e2f651618d0afc7988b17909a4f282b73559f"
+        },
+        {
+          "stop": "terminated",
+          "steps": 3,
+          "chunk_sha256": "c0d5cda3c010a3a57d7d6a73dc9fdb5ea89e7f9ac31107dc737c5b8d69822e7c",
+          "issued_sha256": "ae5b7f001d0f45e9ffda021a71f0d2906345e490e61c2362d0327d8e3dc21ee6"
+        }
+      ],
+      "physical_chunk_transport_tested": false
+    },
+    "drawer_open_place": {
+      "actual_checkpoint_cpu_prediction_and_sequential_prefix_match": true,
+      "sequential_vs_chunk_fixture_stop_cases": [
+        "none",
+        "success",
+        "terminated",
+        "truncated"
+      ],
+      "step": 3000,
+      "norm_sha256": "a38a6a813e26aa410f6f117a6f5de108f5f08e36abf934f652ae9ccd901af18e",
+      "model_revision": "a414d47aa39ae3ee82bf78e413ab458b204103b3",
+      "rounds": [
+        {
+          "stop": "none",
+          "steps": 10,
+          "chunk_sha256": "0e49cb7b26a11beaa9e19223ad855582fd1d40e92db7ad28025ee17e7eefb30f",
+          "issued_sha256": "76bf03acad42f44325574a2d19abc3ac6179a901a9097e40f460b092d28b6b43"
+        },
+        {
+          "stop": "terminated",
+          "steps": 3,
+          "chunk_sha256": "657c71fda1185e7deab9bd66fa62ee322064774c0ffefa282ced3a57e430c4de",
+          "issued_sha256": "522e6a83c51adac23486be7f408327b82f72f1dfe66548379b61491389edd375"
+        }
+      ],
+      "physical_chunk_transport_tested": false
+    }
+  },
+  "transport_delay_injection": {
+    "scope": "Actual sleep-injected transport fixture; mock model; no physical execution duration",
+    "results": [
+      {
+        "delay_s": 0.1,
+        "success_query_remote": false,
+        "sequential_requests": 10,
+        "chunk_requests": 1,
+        "sequential_wall_s": 1.007049729116261,
+        "chunk_wall_s": 0.10180372465401888
+      },
+      {
+        "delay_s": 0.1,
+        "success_query_remote": true,
+        "sequential_requests": 20,
+        "chunk_requests": 1,
+        "sequential_wall_s": 2.0042044781148434,
+        "chunk_wall_s": 0.1016543610021472
+      },
+      {
+        "delay_s": 0.3,
+        "success_query_remote": false,
+        "sequential_requests": 10,
+        "chunk_requests": 1,
+        "sequential_wall_s": 3.0027008708566427,
+        "chunk_wall_s": 0.3010219978168607
+      },
+      {
+        "delay_s": 0.3,
+        "success_query_remote": true,
+        "sequential_requests": 20,
+        "chunk_requests": 1,
+        "sequential_wall_s": 6.006199666298926,
+        "chunk_wall_s": 0.3019278673455119
+      },
+      {
+        "delay_s": 0.5,
+        "success_query_remote": false,
+        "sequential_requests": 10,
+        "chunk_requests": 1,
+        "sequential_wall_s": 5.0043858317658305,
+        "chunk_wall_s": 0.5020289523527026
+      },
+      {
+        "delay_s": 0.5,
+        "success_query_remote": true,
+        "sequential_requests": 20,
+        "chunk_requests": 1,
+        "sequential_wall_s": 10.005989786237478,
+        "chunk_wall_s": 0.5015809629112482
+      }
+    ]
+  },
+  "default_path": "public sequential env.step; ordered path requires explicit host binding",
+  "not_verified": [
+    "official robot SDK integration and queue cancellation",
+    "official episode 14",
+    "RTX 5090 timing",
+    "physical end-to-end execution for all ten tasks"
+  ],
+  "checkpoint_dependency_binding_changes": false
+}

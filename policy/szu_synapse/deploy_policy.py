@@ -7,8 +7,10 @@ import numpy as np
 
 try:
     from .timing import EpisodeTiming
+    from .chunk_execution import bind_chunk_executor as bind_chunk_executor, execute_chunk
 except ImportError:
     from timing import EpisodeTiming
+    from chunk_execution import bind_chunk_executor as bind_chunk_executor, execute_chunk
 
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
@@ -86,7 +88,60 @@ class TaskPolicy:
 def get_model(usr_args):
     return TaskPolicy(usr_args)
 
+def predict_action_chunk(model, observation, *, noise=None):
+    """Return the existing execution prefix, not all 50 predicted actions.
+
+    One call performs one prediction from a measured observation. No command is
+    issued here. The host may pass this prefix to its reviewed ordered executor.
+    """
+    actions = model.infer(observation, noise=noise) if noise is not None else model.infer(observation)
+    prefix = np.array(actions[:model.execute_steps], dtype=np.float32, copy=True, order='C')
+    prefix.setflags(write=False)
+    return prefix
+
+
 def eval(env, model, observation):
+    executor = getattr(model, 'chunk_executor', None)
+    if executor is None:
+        return _eval_sequential(env, model, observation)
+    timing = model.timing
+    phase = 'inference'
+    result = None
+    try:
+        if getattr(model, '_chunk_failed', False):
+            phase = 'previous_chunk_failure'
+            raise RuntimeError('Previous chunk failed; reconcile execution and bind a reviewed executor before continuing')
+        if getattr(model, '_chunk_stopped', False):
+            phase = 'episode_already_stopped'
+            raise RuntimeError('Executor reported an episode stop; host must end/reset the environment before further actions')
+        timing.event('phase_start', phase=phase)
+        started = time.perf_counter()
+        actions = predict_action_chunk(model, observation)
+        inference_s = time.perf_counter() - started
+        phase = 'chunk_execution_feedback'
+        timing.event('phase_start', phase=phase, requested_actions=len(actions))
+        timing.dispatch()
+        started = time.perf_counter()
+        result = execute_chunk(executor, model.task, actions)
+        roundtrip_s = time.perf_counter() - started
+        model._chunk_stopped = bool(result.success or result.terminated or result.truncated)
+        # Validate a received observation without replacing it with commands.
+        phase = 'chunk_response_validation'
+        encode_observation(result.observation, model.prompt)
+        timing.record_batch(inference_s, model.last_inference_timing, roundtrip_s, result)
+        return result.observation, result.info, result.truncated, [inference_s]
+    except Exception as exc:
+        if phase in ('chunk_execution_feedback', 'chunk_response_validation'):
+            model._chunk_failed = True
+        timing.event('unrecoverable_error', phase=phase,
+                     request_id=result.request_id if result is not None else getattr(exc, 'request_id', None),
+                     completed_actions_this_call=int(result.executed_steps) if result is not None else getattr(exc, 'executed_steps', None),
+                     error_type=type(exc).__name__, error=str(exc),
+                     retry_performed=False, sequential_fallback_performed=False)
+        raise
+
+
+def _eval_sequential(env, model, observation):
     import torch
     timing = model.timing
     phase = 'inference'
@@ -96,7 +151,7 @@ def eval(env, model, observation):
     try:
         timing.event('phase_start', phase=phase)
         started = time.perf_counter()
-        actions = model.infer(observation)[:model.execute_steps]
+        actions = predict_action_chunk(model, observation)
         inference_times = [time.perf_counter() - started]
         phase = 'action_preparation'
         started = time.perf_counter()
@@ -105,7 +160,7 @@ def eval(env, model, observation):
             raise ValueError(f'Expected the official 14D action interface, got {action_dim}')
         # Stage the already predicted prefix with one device transfer. The public
         # simulator has only step(); do not invent a real-robot chunk RPC here.
-        tensors = torch.as_tensor(actions, dtype=torch.float32,
+        tensors = torch.tensor(actions, dtype=torch.float32,
                                   device=env.unwrapped.device).unsqueeze(1)
         if tensors.is_cuda:
             torch.cuda.synchronize(tensors.device)
@@ -151,3 +206,6 @@ def reset_model(model):
     # The evaluator calls this after env.reset; do not reset the model RNG or
     # invent observations. Keep model behavior identical to the submitted policy.
     model.timing.reset()
+    model._chunk_stopped = False
+    # A reset does not resolve an ambiguous transport failure or cancel a robot
+    # queue. Keep _chunk_failed latched until the host explicitly rebinds.
